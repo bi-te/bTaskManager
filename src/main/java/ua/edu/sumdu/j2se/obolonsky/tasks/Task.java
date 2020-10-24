@@ -195,20 +195,27 @@ public class Task {
      * {@code -1} if that time does not exist
      */
     public int nextTimeAfter(int current) {
+        /* pureIntervals = start + n * interval <= current; (n є N)
+        *  pureIntervals <= current < pureIntervals + interval  */
+        int pureIntervals;
         if (active) {
             if (time != 0 && current < time) {
                 return time;
-            } else if (start > current) {
-                return start;
-            } else if (current < end - interval) {
-                return current - ((current - start) % interval) + interval;
-            } else {
-                return -1;
             }
-        } else {
-            return -1;
+            if (start > current) {
+                return start;
+            }
+            if (start != 0) {
+                pureIntervals = (current - ((current - start) % interval));
+                if (pureIntervals < end - interval) {
+                    return pureIntervals + interval;
+                }
+            }
         }
+        return -1;
     }
+
+
 
     /**
      * Returns a string representation of the task.
