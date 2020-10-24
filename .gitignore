@@ -1,3 +1,5 @@
 /src/test/
 NCTaskManager.iml
 /target/
+/docs/
+docs.bat
