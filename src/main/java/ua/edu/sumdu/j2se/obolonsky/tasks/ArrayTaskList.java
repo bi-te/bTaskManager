@@ -22,7 +22,7 @@ public class ArrayTaskList {
      * {@code ArrayTaskList} that has default length = 0.
      */
     public ArrayTaskList() {
-        taskArray = new Task[0];
+        taskArray = new Task[10];
     }
 
 
@@ -37,7 +37,7 @@ public class ArrayTaskList {
          * creating a new array and copying existing elements to it
          */
         if (tasks == taskArray.length) {
-            taskArray = Arrays.copyOf(taskArray, tasks + 10);
+            taskArray = Arrays.copyOf(taskArray, tasks * 2);
         }
         taskArray[tasks] = task;
         tasks++;
@@ -75,8 +75,8 @@ public class ArrayTaskList {
 
         /* creates a new array with existing elements but with the length reduced by 10
         * to not take up extra space*/
-        if (exist && taskArray.length - tasks >= 15) {
-            taskArray = Arrays.copyOf(taskArray, taskArray.length - 10);
+        if (exist && taskArray.length / 4 == tasks && taskArray.length != 10) {
+            taskArray = Arrays.copyOf(taskArray, taskArray.length / 2);
         }
         return exist;
     }
