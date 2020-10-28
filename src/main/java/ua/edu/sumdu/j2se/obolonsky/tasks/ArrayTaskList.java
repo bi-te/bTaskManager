@@ -10,12 +10,12 @@ public class ArrayTaskList {
     /**
      * The number of tasks in the array.
      */
-    int tasks;
+    private int tasks;
 
     /**
      * The array that stores {@code Task} objects.
      */
-    Task[] taskArray;
+    private Task[] taskArray;
 
     /**
      * Constructor that creates a new instance of
@@ -53,12 +53,8 @@ public class ArrayTaskList {
     public boolean remove(Task task) {
         int i = tasks - 1;
         boolean exist = false;
-        for (; i >=  0; i--) {
-            if (task.getTitle().equals(taskArray[i].getTitle()) &&
-                    task.getTime() == taskArray[i].getTime() &&
-                    task.getStartTime() == taskArray[i].getStartTime() &&
-                    task.getEndTime() == taskArray[i].getEndTime() &&
-                    task.getRepeatInterval() == taskArray[i].getRepeatInterval()) {
+        for (; i >= 0; i--) {
+            if (task.equals(taskArray[i])) {
                 taskArray[i] = null;
                 exist = true;
                 tasks--;
@@ -67,14 +63,14 @@ public class ArrayTaskList {
         }
 
         /* if removed task was not the last, replaces the last task to the position of the removed one
-        * to make continuous sequence */
-        if ( i != tasks){
+         * to make continuous sequence */
+        if (i != tasks) {
             taskArray[i] = taskArray[tasks];
             taskArray[tasks] = null;
         }
 
         /* creates a new array with existing elements but with the length reduced by 10
-        * to not take up extra space*/
+         * to not take up extra space*/
         if (exist && taskArray.length / 4 == tasks && taskArray.length != 10) {
             taskArray = Arrays.copyOf(taskArray, taskArray.length / 2);
         }
@@ -126,7 +122,7 @@ public class ArrayTaskList {
      * within specified time period .
      *
      * @param from The start of the given period
-     * @param to The end of the given period
+     * @param to   The end of the given period
      * @return The {ArrayTaskList}
      */
     public ArrayTaskList incoming(int from, int to) {
@@ -134,7 +130,8 @@ public class ArrayTaskList {
         ArrayTaskList chosenTasks = new ArrayTaskList();
         int count = 0;
         for (int i = 0; i < tasks; i++) {
-            if (taskArray[i].getStartTime() > from && taskArray[i].getEndTime() < to && taskArray[i].isActive()) {
+            if (taskArray[i].nextTimeAfter(from) > from
+                    && taskArray[i].nextTimeAfter(from) <= to && taskArray[i].isActive()) {
                 chosenTasks.add(taskArray[i]);
                 count++;
             }
@@ -154,9 +151,9 @@ public class ArrayTaskList {
      */
     @Override
     public String toString() {
-        if (tasks == 0){
+        if (tasks == 0) {
             return "[]";
-        } 
+        }
         StringBuilder ans = new StringBuilder("[");
         int i = 0;
         while (i < tasks) {

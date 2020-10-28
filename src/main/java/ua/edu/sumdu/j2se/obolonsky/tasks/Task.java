@@ -1,5 +1,7 @@
 package ua.edu.sumdu.j2se.obolonsky.tasks;
 
+import java.util.Objects;
+
 /**
  * The {@code Task} class represent several types of tasks
  * and provides methods for manipulating them.
@@ -241,5 +243,20 @@ public class Task {
         return task;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Task task = (Task) o;
+        return time == task.time &&
+                interval == task.interval &&
+                start == task.start &&
+                end == task.end &&
+                title.equals(task.title);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(title, time, interval, start, end);
+    }
 }
