@@ -131,7 +131,7 @@ public class ArrayTaskList {
         int count = 0;
         for (int i = 0; i < tasks; i++) {
             if (taskArray[i].nextTimeAfter(from) > from
-                    && taskArray[i].nextTimeAfter(from) <= to && taskArray[i].isActive()) {
+                    && taskArray[i].nextTimeAfter(from) <= to) {
                 chosenTasks.add(taskArray[i]);
                 count++;
             }
