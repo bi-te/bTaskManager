@@ -9,7 +9,7 @@ public class Task {
     /**
      * The name of the task.
      */
-    private String task;
+    private String title;
 
     /**
      * The time when non-repeatable task will be executed.
@@ -40,11 +40,11 @@ public class Task {
      * Initializes a newly created {@code Task} object that
      * is non-repeatable and executes only once.
      *
-     * @param task The name of the task
-     * @param time Time when the task will be executed
+     * @param title The name of the task
+     * @param time  Time when the task will be executed
      */
-    public Task(String task, int time) {
-        this.task = task;
+    public Task(String title, int time) {
+        this.title = title;
         this.time = time;
     }
 
@@ -54,13 +54,13 @@ public class Task {
      * period from {@code start} to {@code end} with fixed
      * interval.
      *
-     * @param task     The name of the task
+     * @param title    The name of the task
      * @param start    Time when the task will be executed
      * @param end      Time until which the task can be executed
      * @param interval The interval at which the task is executed
      */
-    public Task(String task, int start, int end, int interval) {
-        this.task = task;
+    public Task(String title, int start, int end, int interval) {
+        this.title = title;
         this.start = start;
         this.interval = interval;
         this.end = end;
@@ -72,7 +72,7 @@ public class Task {
      * @return the {@code title} of the task
      */
     public String getTitle() {
-        return task;
+        return title;
     }
 
     /**
@@ -81,7 +81,7 @@ public class Task {
      * @param task The new value of the {@code title} of the task
      */
     public void setTitle(String task) {
-        this.task = task;
+        this.title = task;
     }
 
     /**
@@ -196,7 +196,7 @@ public class Task {
      */
     public int nextTimeAfter(int current) {
         /* pureIntervals = start + n * interval <= current; (n є N)
-        *  pureIntervals <= current < pureIntervals + interval  */
+         *  pureIntervals <= current < pureIntervals + interval  */
         int pureIntervals;
         if (active) {
             if (time != 0 && current < time) {
@@ -216,7 +216,6 @@ public class Task {
     }
 
 
-
     /**
      * Returns a string representation of the task.
      * The string representation consists of the title of task and
@@ -231,10 +230,11 @@ public class Task {
      */
     @Override
     public String toString() {
+        String task;
         if (time != 0) {
-            String task = this.task + ": " + time;
+            task = this.title + ": " + time;
         } else {
-            String task = this.task + ": { start - " + start
+            task = this.title + ": { start - " + start
                     + ", end - " + end + ", interval - " + interval
                     + "}";
         }
