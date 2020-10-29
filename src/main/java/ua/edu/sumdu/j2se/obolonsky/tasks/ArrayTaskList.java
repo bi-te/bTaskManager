@@ -1,6 +1,8 @@
 package ua.edu.sumdu.j2se.obolonsky.tasks;
 
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Arrays;
 
 /**
@@ -30,12 +32,14 @@ public class ArrayTaskList {
      * Appends the specified element to the end of the array.
      *
      * @param task The new {@code Task} element
+     * @throws IllegalArgumentException if the specified {@code task} is null
      */
-    public void add(Task task) {
+    public void add(@NotNull Task task) {
         /*
          * If the array is full, then increases its length by 10 by
          * creating a new array and copying existing elements to it
          */
+
         if (tasks == taskArray.length) {
             taskArray = Arrays.copyOf(taskArray, tasks * 2);
         }
@@ -54,7 +58,7 @@ public class ArrayTaskList {
         int i = tasks - 1;
         boolean exist = false;
         for (; i >= 0; i--) {
-            if (task.equals(taskArray[i])) {
+            if (taskArray[i].equals(task)) {
                 taskArray[i] = null;
                 exist = true;
                 tasks--;
@@ -64,7 +68,7 @@ public class ArrayTaskList {
 
         /* if removed task was not the last, replaces the last task to the position of the removed one
          * to make continuous sequence */
-        if (i != tasks) {
+        if (exist && i != tasks) {
             taskArray[i] = taskArray[tasks];
             taskArray[tasks] = null;
         }
@@ -93,8 +97,12 @@ public class ArrayTaskList {
      *
      * @param index The position from where task will be taken
      * @return The {@code Task} object
+     * @throws IndexOutOfBoundsException if {@code index} is out of range.
      */
     public Task getTask(int index) {
+        if (index < 0 || index >= tasks){
+            throw new IndexOutOfBoundsException("Index " + index + " out of bounds for length " + tasks);
+        }
         return taskArray[index];
     }
 
@@ -126,9 +134,14 @@ public class ArrayTaskList {
      * @return The {ArrayTaskList}
      */
     public ArrayTaskList incoming(int from, int to) {
-
+        if (from < 0){
+            from = 0;
+        }
         ArrayTaskList chosenTasks = new ArrayTaskList();
         int count = 0;
+        if (from >= to){
+            return chosenTasks;
+        }
         for (int i = 0; i < tasks; i++) {
             if (taskArray[i].nextTimeAfter(from) > from
                     && taskArray[i].nextTimeAfter(from) <= to) {

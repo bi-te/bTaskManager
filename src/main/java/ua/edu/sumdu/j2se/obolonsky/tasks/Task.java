@@ -1,5 +1,7 @@
 package ua.edu.sumdu.j2se.obolonsky.tasks;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Objects;
 
 /**
@@ -44,8 +46,13 @@ public class Task {
      *
      * @param title The name of the task
      * @param time  Time when the task will be executed
+     * @throws IllegalArgumentException if {@code time} is a negative number
      */
     public Task(String title, int time) {
+        if (time < 0) {
+            throw new IllegalArgumentException("argument 'time' is below 0");
+        }
+
         this.title = title;
         this.time = time;
     }
@@ -60,8 +67,21 @@ public class Task {
      * @param start    Time when the task will be executed
      * @param end      Time until which the task can be executed
      * @param interval The interval at which the task is executed
+     * @throws IllegalArgumentException if {@code start} or {@code end}
+     * is a negative number, or {@code interval} is a negative number or
+     * equals to 0, or {@code start} is greater than {@code end}
      */
     public Task(String title, int start, int end, int interval) {
+        if (start < 0) {
+            throw new IllegalArgumentException("start is less than zero");
+        } else if (end < 0) {
+            throw new IllegalArgumentException("end is less than zero");
+        } else if (interval <= 0){
+            throw new IllegalArgumentException("interval is less than or equal to zero");
+        } else if(start > end){
+            throw new IllegalArgumentException("start is greater than end");
+        }
+
         this.title = title;
         this.start = start;
         this.interval = interval;
@@ -82,7 +102,7 @@ public class Task {
      *
      * @param task The new value of the {@code title} of the task
      */
-    public void setTitle(String task) {
+    public void setTitle(@NotNull String task) {
         this.title = task;
     }
 
@@ -120,8 +140,12 @@ public class Task {
      * and sets the {@code time} value
      *
      * @param time The new value of {@code time}
+     * @throws IllegalArgumentException if {@code time} is a negative number
      */
     public void setTime(int time) {
+        if (time < 0) {
+            throw new IllegalArgumentException("argument 'time' is less than 0");
+        }
         this.time = time;
         this.start = 0;
         this.end = 0;
@@ -167,8 +191,20 @@ public class Task {
      * @param start    The new value of {@code start}
      * @param end      The new value of {@code end}
      * @param interval The new value of {@code interval}
+     * @throws IllegalArgumentException if {@code start} or {@code end}
+     * is a negative number, or {@code interval} is a negative number or
+     * equals to 0, or {@code start} is greater than {@code end}
      */
     public void setTime(int start, int end, int interval) {
+        if (start < 0) {
+            throw new IllegalArgumentException("start is less than zero");
+        } else if (end < 0) {
+            throw new IllegalArgumentException("end is less than zero");
+        } else if (interval <= 0){
+            throw new IllegalArgumentException("interval is less than or equal to zero");
+        } else if(start > end){
+            throw new IllegalArgumentException("start is greater than end");
+        }
         this.start = start;
         this.end = end;
         this.interval = interval;
@@ -197,6 +233,9 @@ public class Task {
      * {@code -1} if that time does not exist
      */
     public int nextTimeAfter(int current) {
+        if (current < 0){
+            current = 0;
+        }
         /* pureIntervals = start + n * interval <= current; (n є N)
          *  pureIntervals <= current < pureIntervals + interval  */
         int pureIntervals;
