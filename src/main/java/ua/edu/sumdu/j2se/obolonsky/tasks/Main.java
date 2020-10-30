@@ -1,17 +1,16 @@
 package ua.edu.sumdu.j2se.obolonsky.tasks;
 
 public class Main {
-
 	public static void main(String[] args) {
 		Task t = new Task("t", 12);
-		t.setActive(true);
 		Task g = new Task("g", 13);
-		ArrayTaskList tasks = new ArrayTaskList();
+		LinkedTaskList tasks = new LinkedTaskList();
 		tasks.add(t);
 		tasks.add(g);
-		tasks.remove(null);
-		tasks.remove(g);
-		System.out.println(tasks.incoming(-10, -3));
+		tasks.add(new Task("k", 14));
+		tasks.add(new Task("l", 15));
+		tasks.add(new Task("j", 16, 23, 2));
 
+		System.out.println(tasks);
 	}
 }

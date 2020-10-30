@@ -21,7 +21,7 @@ public class ArrayTaskList {
 
     /**
      * Constructor that creates a new instance of
-     * {@code ArrayTaskList} that has default length = 0.
+     * {@code ArrayTaskList} that has default length = 10.
      */
     public ArrayTaskList() {
         taskArray = new Task[10];
@@ -32,7 +32,6 @@ public class ArrayTaskList {
      * Appends the specified element to the end of the array.
      *
      * @param task The new {@code Task} element
-     * @throws IllegalArgumentException if the specified {@code task} is null
      */
     public void add(@NotNull Task task) {
         /*
