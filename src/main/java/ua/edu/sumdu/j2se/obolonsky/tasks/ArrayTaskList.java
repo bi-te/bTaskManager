@@ -35,7 +35,7 @@ public class ArrayTaskList {
      */
     public void add(@NotNull Task task) {
         /*
-         * If the array is full, then increases its length by 10 by
+         * If the array is full, then increases its length twice by
          * creating a new array and copying existing elements to it
          */
 
@@ -76,7 +76,7 @@ public class ArrayTaskList {
             taskArray[tasks] = null;
         }
 
-        /* creates a new array with existing elements but with the length reduced by 10
+        /* creates a new array with existing elements but with the length reduced twice
          * to not take up extra space*/
         if (exist && taskArray.length / 4 == tasks && taskArray.length != 10) {
             taskArray = Arrays.copyOf(taskArray, taskArray.length / 2);
