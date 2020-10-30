@@ -54,6 +54,10 @@ public class ArrayTaskList {
      * {@code false} if not
      */
     public boolean remove(Task task) {
+        if (task == null) {
+            return false;
+        }
+
         int i = tasks - 1;
         boolean exist = false;
         for (; i >= 0; i--) {
@@ -99,7 +103,7 @@ public class ArrayTaskList {
      * @throws IndexOutOfBoundsException if {@code index} is out of range.
      */
     public Task getTask(int index) {
-        if (index < 0 || index >= tasks){
+        if (index < 0 || index >= tasks) {
             throw new IndexOutOfBoundsException("Index " + index + " out of bounds for length " + tasks);
         }
         return taskArray[index];
@@ -133,12 +137,12 @@ public class ArrayTaskList {
      * @return The {ArrayTaskList}
      */
     public ArrayTaskList incoming(int from, int to) {
-        if (from < 0){
+        if (from < 0) {
             from = 0;
         }
         ArrayTaskList chosenTasks = new ArrayTaskList();
         int count = 0;
-        if (from >= to){
+        if (from >= to) {
             return chosenTasks;
         }
         for (int i = 0; i < tasks; i++) {

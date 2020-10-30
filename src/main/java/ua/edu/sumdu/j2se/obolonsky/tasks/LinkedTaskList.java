@@ -24,7 +24,8 @@ public class LinkedTaskList {
     /**
      * Constructor that creates a new empty list.
      */
-    public LinkedTaskList(){}
+    public LinkedTaskList() {
+    }
 
     /**
      * The inner class that represents a node of the list.
@@ -33,8 +34,8 @@ public class LinkedTaskList {
         Node prev;
         Node next;
         Task task;
-        
-        Node (Task task, Node prev, Node next) {
+
+        Node(Task task, Node prev, Node next) {
             this.task = task;
             this.prev = prev;
             this.next = next;
@@ -46,12 +47,12 @@ public class LinkedTaskList {
      *
      * @param task The new {@code Task} element
      */
-    public void add(@NotNull Task task){
+    public void add(@NotNull Task task) {
         Node newTask = new Node(task, last, null);
         final Node lastNode = last;
         last = newTask;
 
-        if (lastNode == null){
+        if (lastNode == null) {
             first = newTask;
         } else {
             lastNode.next = newTask;
@@ -66,19 +67,23 @@ public class LinkedTaskList {
      * @return {@code true} if element is in the list or
      * {@code false} if not
      */
-    public boolean remove(Task task){
+    public boolean remove(Task task) {
+        if (task == null) {
+            return false;
+        }
+
         Node current = first;
 
-        for (; current != null; current = current.next){
-            if(current.task.equals(task)){
+        for (; current != null; current = current.next) {
+            if (current.task.equals(task)) {
 
-                if (current.prev == null){
+                if (current.prev == null) {
                     first = current.next;
                 } else {
                     current.prev.next = current.next;
                 }
 
-                if (current.next == null){
+                if (current.next == null) {
                     last = current.prev;
                 } else {
                     current.next.prev = current.prev;
@@ -95,7 +100,9 @@ public class LinkedTaskList {
      *
      * @return The {@code int} value - number of tasks.
      */
-    public int size(){return tasks;}
+    public int size() {
+        return tasks;
+    }
 
     /**
      * Returns the task at the specified position in the list.
@@ -104,20 +111,20 @@ public class LinkedTaskList {
      * @return The {@code Task} object
      * @throws IndexOutOfBoundsException if {@code index} is out of range.
      */
-    public Task getTask(int index){
-        if (index < 0 || index >= tasks){
+    public Task getTask(int index) {
+        if (index < 0 || index >= tasks) {
             throw new IndexOutOfBoundsException("Index " + index + " out of bounds for length " + tasks);
         }
 
         Node returnNode;
-        if (index < tasks / 2){
+        if (index < tasks / 2) {
             returnNode = first;
-            for(int i = 0; i < index; i++){
+            for (int i = 0; i < index; i++) {
                 returnNode = returnNode.next;
             }
         } else {
             returnNode = last;
-            for(int i = tasks - 1; i > index; i--){
+            for (int i = tasks - 1; i > index; i--) {
                 returnNode = returnNode.prev;
             }
         }
@@ -132,12 +139,12 @@ public class LinkedTaskList {
      * @param to   The end of the given period
      * @return The {LinkedTaskList}
      */
-    public LinkedTaskList incoming(int from, int to){
-        if (from < 0){
+    public LinkedTaskList incoming(int from, int to) {
+        if (from < 0) {
             from = 0;
         }
         LinkedTaskList chosenTasks = new LinkedTaskList();
-        if (from >= to){
+        if (from >= to) {
             return chosenTasks;
         }
         for (Node current = first; current != null; current = current.next) {
