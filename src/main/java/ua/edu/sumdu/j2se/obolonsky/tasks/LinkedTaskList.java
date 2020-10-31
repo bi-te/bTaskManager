@@ -30,7 +30,7 @@ public class LinkedTaskList {
     /**
      * The inner class that represents a node of the list.
      */
-    private static class Node {
+    private class Node {
         Node prev;
         Node next;
         Task task;
