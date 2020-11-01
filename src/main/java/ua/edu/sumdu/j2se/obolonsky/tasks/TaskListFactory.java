@@ -8,7 +8,7 @@ public class TaskListFactory {
             case ARRAY:
                 return new ArrayTaskList();
             default:
-                throw new IllegalArgumentException("The parameter 'type' - " + type + " is wrong" );
+                throw new IllegalArgumentException("The parameter 'type' - " + type + " is wrong");
         }
     }
 }

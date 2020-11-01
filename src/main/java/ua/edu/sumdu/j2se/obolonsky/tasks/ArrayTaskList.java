@@ -96,7 +96,9 @@ public class ArrayTaskList extends AbstractTaskList {
     }
 
     @Override
-    public ListTypes.types getType(){return ListTypes.types.ARRAY; }
+    public ListTypes.types getType() {
+        return ListTypes.types.ARRAY;
+    }
 
 
     /**

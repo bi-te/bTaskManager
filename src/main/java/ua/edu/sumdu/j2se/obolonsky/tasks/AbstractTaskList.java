@@ -2,7 +2,7 @@ package ua.edu.sumdu.j2se.obolonsky.tasks;
 
 import java.util.Arrays;
 
-public abstract class AbstractTaskList{
+public abstract class AbstractTaskList {
     protected int tasks;
 
 
@@ -10,7 +10,9 @@ public abstract class AbstractTaskList{
 
     public abstract boolean remove(Task task);
 
-    public int size(){return tasks;}
+    public int size() {
+        return tasks;
+    }
 
     public abstract Task getTask(int index);
 
@@ -24,7 +26,7 @@ public abstract class AbstractTaskList{
      * @param to   The end of the given period
      * @return The {LinkedTaskList}
      */
-    public AbstractTaskList incoming(int from, int to){
+    public AbstractTaskList incoming(int from, int to) {
         if (from < 0) {
             from = 0;
         }

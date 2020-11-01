@@ -5,7 +5,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Doubly-linked {@code LinkedTaskList} represents a list of tasks.
  */
-public class LinkedTaskList extends AbstractTaskList{
+public class LinkedTaskList extends AbstractTaskList {
     /**
      * The first node of the list.
      */
@@ -117,7 +117,9 @@ public class LinkedTaskList extends AbstractTaskList{
         return returnNode.task;
     }
 
-    public ListTypes.types getType(){return ListTypes.types.LINKED; }
+    public ListTypes.types getType() {
+        return ListTypes.types.LINKED;
+    }
 
     /**
      * Returns a string representation of the contents of the list.
