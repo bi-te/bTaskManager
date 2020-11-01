@@ -42,6 +42,7 @@ public class LinkedTaskList extends AbstractTaskList {
      *
      * @param task The new {@code Task} element
      */
+    @Override
     public void add(@NotNull Task task) {
         Node newTask = new Node(task, last, null);
         final Node lastNode = last;
@@ -62,6 +63,7 @@ public class LinkedTaskList extends AbstractTaskList {
      * @return {@code true} if element is in the list or
      * {@code false} if not
      */
+    @Override
     public boolean remove(Task task) {
         if (task == null) {
             return false;
@@ -97,6 +99,7 @@ public class LinkedTaskList extends AbstractTaskList {
      * @return The {@code Task} object
      * @throws IndexOutOfBoundsException if {@code index} is out of range.
      */
+    @Override
     public Task getTask(int index) {
         if (index < 0 || index >= tasks) {
             throw new IndexOutOfBoundsException("Index " + index + " out of bounds for length " + tasks);
@@ -117,6 +120,7 @@ public class LinkedTaskList extends AbstractTaskList {
         return returnNode.task;
     }
 
+    @Override
     public ListTypes.types getType() {
         return ListTypes.types.LINKED;
     }
