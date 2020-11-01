@@ -5,12 +5,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Doubly-linked {@code LinkedTaskList} represents a list of tasks.
  */
-public class LinkedTaskList {
-    /**
-     * the number of tasks.
-     */
-    private int tasks;
-
+public class LinkedTaskList extends AbstractTaskList{
     /**
      * The first node of the list.
      */
@@ -96,15 +91,6 @@ public class LinkedTaskList {
     }
 
     /**
-     * Returns the number of tasks in the list.
-     *
-     * @return The {@code int} value - number of tasks.
-     */
-    public int size() {
-        return tasks;
-    }
-
-    /**
      * Returns the task at the specified position in the list.
      *
      * @param index The position from where task will be taken
@@ -131,30 +117,7 @@ public class LinkedTaskList {
         return returnNode.task;
     }
 
-    /**
-     * Returns an {@code LinkedTaskList} consists of tasks which are executed
-     * within specified time period .
-     *
-     * @param from The start of the given period
-     * @param to   The end of the given period
-     * @return The {LinkedTaskList}
-     */
-    public LinkedTaskList incoming(int from, int to) {
-        if (from < 0) {
-            from = 0;
-        }
-        LinkedTaskList chosenTasks = new LinkedTaskList();
-        if (from >= to) {
-            return chosenTasks;
-        }
-        for (Node current = first; current != null; current = current.next) {
-            if (current.task.nextTimeAfter(from) > from
-                    && current.task.nextTimeAfter(from) <= to) {
-                chosenTasks.add(current.task);
-            }
-        }
-        return chosenTasks;
-    }
+    public ListTypes.types getType(){return ListTypes.types.LINKED; }
 
     /**
      * Returns a string representation of the contents of the list.
