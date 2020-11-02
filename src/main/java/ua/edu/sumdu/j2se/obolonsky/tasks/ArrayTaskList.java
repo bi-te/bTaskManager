@@ -6,6 +6,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import java.util.Objects;
 
 /**
  * The {@code ArrayTaskList} class represents an array of tasks.
@@ -181,5 +182,21 @@ public class ArrayTaskList extends AbstractTaskList {
             i++;
         }
         return ans.substring(0, ans.length() - 2) + "]";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ArrayTaskList tasks1 = (ArrayTaskList) o;
+        return tasks == tasks1.tasks &&
+                Arrays.equals(taskArray, tasks1.taskArray);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = Objects.hash(tasks);
+        result = 31 * result + Arrays.hashCode(taskArray);
+        return result;
     }
 }

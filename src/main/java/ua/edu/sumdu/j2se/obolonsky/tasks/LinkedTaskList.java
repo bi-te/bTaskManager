@@ -4,6 +4,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import java.util.Objects;
 
 /**
  * Doubly-linked {@code LinkedTaskList} represents a list of tasks.
@@ -212,4 +213,28 @@ public class LinkedTaskList extends AbstractTaskList {
         return ans.substring(0, ans.length() - 2) + "]";
     }
 
+    @Override
+    public boolean equals(Object o){
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return  false;
+        LinkedTaskList list = (LinkedTaskList) o;
+        Iterator<Task> list1 = this.iterator();
+        Iterator<Task> list2 = list.iterator();
+        while (list1.hasNext() && list2.hasNext()){
+            if (!Objects.equals(list1.next(), list2.next())){
+                return false;
+            };
+        }
+        return !list1.hasNext() && !list2.hasNext();
+    }
+
+    @Override
+    public int hashCode(){
+        int result = 1;
+
+        for (Object element : this)
+            result = 31 * result + (element == null ? 0 : element.hashCode());
+
+        return result;
+    }
 }
