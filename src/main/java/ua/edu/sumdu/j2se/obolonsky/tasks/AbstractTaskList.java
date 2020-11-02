@@ -1,18 +1,13 @@
 package ua.edu.sumdu.j2se.obolonsky.tasks;
 
-import java.util.Arrays;
-
 public abstract class AbstractTaskList {
-    protected int tasks;
-
+    private int tasks;
 
     public abstract void add(Task task);
 
     public abstract boolean remove(Task task);
 
-    public int size() {
-        return tasks;
-    }
+    public abstract int size();
 
     public abstract Task getTask(int index);
 

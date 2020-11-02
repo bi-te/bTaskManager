@@ -10,6 +10,8 @@ import java.util.Arrays;
  */
 public class ArrayTaskList extends AbstractTaskList {
 
+    private int tasks;
+
     /**
      * The array that stores {@code Task} objects.
      */
@@ -96,6 +98,11 @@ public class ArrayTaskList extends AbstractTaskList {
             throw new IndexOutOfBoundsException("Index " + index + " out of bounds for length " + tasks);
         }
         return taskArray[index];
+    }
+
+    @Override
+    public int size(){
+        return tasks;
     }
 
     @Override

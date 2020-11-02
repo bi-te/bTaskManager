@@ -16,6 +16,8 @@ public class LinkedTaskList extends AbstractTaskList {
      */
     private Node last;
 
+    private int tasks;
+
     /**
      * Constructor that creates a new empty list.
      */
@@ -118,6 +120,11 @@ public class LinkedTaskList extends AbstractTaskList {
             }
         }
         return returnNode.task;
+    }
+
+    @Override
+    public int size(){
+        return tasks;
     }
 
     @Override

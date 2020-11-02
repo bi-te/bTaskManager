@@ -10,7 +10,6 @@ public class Main {
         tasks.add(new Task("k", 14));
         tasks.add(new Task("l", 15));
         tasks.add(new Task("j", 16, 23, 2));
-
-        System.out.println(tasks);
+        System.out.println(tasks.size());
     }
 }
