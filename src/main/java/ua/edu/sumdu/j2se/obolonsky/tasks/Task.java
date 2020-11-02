@@ -8,7 +8,7 @@ import java.util.Objects;
  * The {@code Task} class represent several types of tasks
  * and provides methods for manipulating them.
  */
-public class Task {
+public class Task implements Cloneable{
 
     /**
      * The name of the task.
@@ -297,5 +297,10 @@ public class Task {
     @Override
     public int hashCode() {
         return Objects.hash(title, time, interval, start, end);
+    }
+
+    @Override
+    public Task clone() throws CloneNotSupportedException {
+        return (Task) super.clone();
     }
 }

@@ -3,15 +3,12 @@ package ua.edu.sumdu.j2se.obolonsky.tasks;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.NoSuchElementException;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * The {@code ArrayTaskList} class represents an array of tasks.
  */
-public class ArrayTaskList extends AbstractTaskList {
+public class ArrayTaskList extends AbstractTaskList implements Cloneable {
 
     private int tasks;
 
@@ -30,7 +27,7 @@ public class ArrayTaskList extends AbstractTaskList {
 
     @NotNull
     @Override
-    public Iterator<Task> iterator() {
+    public TaskArrayIterator iterator() {
         return new TaskArrayIterator();
     }
 
@@ -68,6 +65,10 @@ public class ArrayTaskList extends AbstractTaskList {
             arrayModification(currentIndex);
             currentIndex--;
             nextIndex--;
+        }
+
+        public void replace(Task task){
+            taskArray[currentIndex] = task;
         }
     }
 
@@ -198,5 +199,12 @@ public class ArrayTaskList extends AbstractTaskList {
         int result = Objects.hash(tasks);
         result = 31 * result + Arrays.hashCode(taskArray);
         return result;
+    }
+
+    @Override
+    public ArrayTaskList clone() throws CloneNotSupportedException{
+        ArrayTaskList copy = (ArrayTaskList) super.clone();
+        taskArray = taskArray.clone();
+        return copy;
     }
 }

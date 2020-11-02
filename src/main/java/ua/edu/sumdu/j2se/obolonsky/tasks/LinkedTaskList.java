@@ -9,7 +9,7 @@ import java.util.Objects;
 /**
  * Doubly-linked {@code LinkedTaskList} represents a list of tasks.
  */
-public class LinkedTaskList extends AbstractTaskList {
+public class LinkedTaskList extends AbstractTaskList implements Cloneable{
     /**
      * The first node of the list.
      */
