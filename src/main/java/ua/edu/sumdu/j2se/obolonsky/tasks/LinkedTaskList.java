@@ -5,12 +5,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Doubly-linked {@code LinkedTaskList} represents a list of tasks.
  */
-public class LinkedTaskList {
-    /**
-     * the number of tasks.
-     */
-    private int tasks;
-
+public class LinkedTaskList extends AbstractTaskList {
     /**
      * The first node of the list.
      */
@@ -20,6 +15,8 @@ public class LinkedTaskList {
      * The last node of the list.
      */
     private Node last;
+
+    private int tasks;
 
     /**
      * Constructor that creates a new empty list.
@@ -47,6 +44,7 @@ public class LinkedTaskList {
      *
      * @param task The new {@code Task} element
      */
+    @Override
     public void add(@NotNull Task task) {
         Node newTask = new Node(task, last, null);
         final Node lastNode = last;
@@ -67,6 +65,7 @@ public class LinkedTaskList {
      * @return {@code true} if element is in the list or
      * {@code false} if not
      */
+    @Override
     public boolean remove(Task task) {
         if (task == null) {
             return false;
@@ -96,21 +95,13 @@ public class LinkedTaskList {
     }
 
     /**
-     * Returns the number of tasks in the list.
-     *
-     * @return The {@code int} value - number of tasks.
-     */
-    public int size() {
-        return tasks;
-    }
-
-    /**
      * Returns the task at the specified position in the list.
      *
      * @param index The position from where task will be taken
      * @return The {@code Task} object
      * @throws IndexOutOfBoundsException if {@code index} is out of range.
      */
+    @Override
     public Task getTask(int index) {
         if (index < 0 || index >= tasks) {
             throw new IndexOutOfBoundsException("Index " + index + " out of bounds for length " + tasks);
@@ -131,29 +122,14 @@ public class LinkedTaskList {
         return returnNode.task;
     }
 
-    /**
-     * Returns an {@code LinkedTaskList} consists of tasks which are executed
-     * within specified time period .
-     *
-     * @param from The start of the given period
-     * @param to   The end of the given period
-     * @return The {LinkedTaskList}
-     */
-    public LinkedTaskList incoming(int from, int to) {
-        if (from < 0) {
-            from = 0;
-        }
-        LinkedTaskList chosenTasks = new LinkedTaskList();
-        if (from >= to) {
-            return chosenTasks;
-        }
-        for (Node current = first; current != null; current = current.next) {
-            if (current.task.nextTimeAfter(from) > from
-                    && current.task.nextTimeAfter(from) <= to) {
-                chosenTasks.add(current.task);
-            }
-        }
-        return chosenTasks;
+    @Override
+    public int size(){
+        return tasks;
+    }
+
+    @Override
+    public ListTypes.types getType() {
+        return ListTypes.types.LINKED;
     }
 
     /**

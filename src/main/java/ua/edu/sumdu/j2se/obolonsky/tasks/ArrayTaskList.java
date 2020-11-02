@@ -8,10 +8,8 @@ import java.util.Arrays;
 /**
  * The {@code ArrayTaskList} class represents an array of tasks.
  */
-public class ArrayTaskList {
-    /**
-     * The number of tasks in the array.
-     */
+public class ArrayTaskList extends AbstractTaskList {
+
     private int tasks;
 
     /**
@@ -33,6 +31,7 @@ public class ArrayTaskList {
      *
      * @param task The new {@code Task} element
      */
+    @Override
     public void add(@NotNull Task task) {
         /*
          * If the array is full, then increases its length twice by
@@ -53,6 +52,7 @@ public class ArrayTaskList {
      * @return {@code true} if element is in the array or
      * {@code false} if not
      */
+    @Override
     public boolean remove(Task task) {
         if (task == null) {
             return false;
@@ -86,22 +86,13 @@ public class ArrayTaskList {
 
 
     /**
-     * Returns the number of tasks in the array.
-     *
-     * @return The {@code int} value - number of tasks
-     */
-    public int size() {
-        return tasks;
-    }
-
-
-    /**
      * Returns the task at the specified position in the array.
      *
      * @param index The position from where task will be taken
      * @return The {@code Task} object
      * @throws IndexOutOfBoundsException if {@code index} is out of range.
      */
+    @Override
     public Task getTask(int index) {
         if (index < 0 || index >= tasks) {
             throw new IndexOutOfBoundsException("Index " + index + " out of bounds for length " + tasks);
@@ -109,52 +100,16 @@ public class ArrayTaskList {
         return taskArray[index];
     }
 
-    /**
-     * Returns the array of tasks.
-     *
-     * @return The {@code Task[]} array
-     */
-    private Task[] getArray() {
-        return taskArray;
+    @Override
+    public int size(){
+        return tasks;
     }
 
-    /**
-     * Sets the array of tasks to the new specified
-     * {@code Task[]} array.
-     *
-     * @param tasks The specified {@code Task[]} array
-     */
-    private void setArray(Task[] tasks) {
-        taskArray = tasks;
+    @Override
+    public ListTypes.types getType() {
+        return ListTypes.types.ARRAY;
     }
 
-    /**
-     * Returns an {@code ArrayTaskList} consists of tasks which are executed
-     * within specified time period .
-     *
-     * @param from The start of the given period
-     * @param to   The end of the given period
-     * @return The {ArrayTaskList}
-     */
-    public ArrayTaskList incoming(int from, int to) {
-        if (from < 0) {
-            from = 0;
-        }
-        ArrayTaskList chosenTasks = new ArrayTaskList();
-        int count = 0;
-        if (from >= to) {
-            return chosenTasks;
-        }
-        for (int i = 0; i < tasks; i++) {
-            if (taskArray[i].nextTimeAfter(from) > from
-                    && taskArray[i].nextTimeAfter(from) <= to) {
-                chosenTasks.add(taskArray[i]);
-                count++;
-            }
-        }
-        chosenTasks.setArray(Arrays.copyOf(chosenTasks.getArray(), count));
-        return chosenTasks;
-    }
 
     /**
      * Returns a string representation of the contents of the array.
