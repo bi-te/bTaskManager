@@ -4,6 +4,8 @@ package ua.edu.sumdu.j2se.obolonsky.tasks;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 /**
  * The {@code ArrayTaskList} class represents an array of tasks.
@@ -23,6 +25,49 @@ public class ArrayTaskList extends AbstractTaskList {
      */
     public ArrayTaskList() {
         taskArray = new Task[10];
+    }
+
+    @NotNull
+    @Override
+    public Iterator<Task> iterator() {
+        return new TaskArrayIterator();
+    }
+
+    private class TaskArrayIterator implements Iterator<Task> {
+        private int nextIndex;
+        private int currentIndex;
+        boolean checked;
+
+        TaskArrayIterator() {
+        }
+
+        @Override
+        public boolean hasNext() {
+            return nextIndex < tasks;
+        }
+
+        @Override
+        public Task next() {
+            if (!hasNext())
+                throw new NoSuchElementException("The iteration has no more elements");
+
+            checked = true;
+            currentIndex = nextIndex;
+            nextIndex++;
+            return taskArray[currentIndex];
+        }
+
+        @Override
+        public void remove() {
+            if (!checked) {
+                throw new IllegalStateException();
+            }
+            taskArray[currentIndex] = null;
+            tasks--;
+            arrayModification(currentIndex);
+            currentIndex--;
+            nextIndex--;
+        }
     }
 
 
@@ -68,20 +113,24 @@ public class ArrayTaskList extends AbstractTaskList {
                 break;
             }
         }
+        if (exist) {
+            arrayModification(i);
+        }
+        return exist;
+    }
 
+    private void arrayModification(int index) {
         /* if removed task was not the last, replaces the last task to the position of the removed one
          * to make continuous sequence */
-        if (exist && i != tasks) {
-            taskArray[i] = taskArray[tasks];
-            taskArray[tasks] = null;
+        for (; index < tasks; index++) {
+            taskArray[index] = taskArray[index + 1];
         }
 
         /* creates a new array with existing elements but with the length reduced twice
          * to not take up extra space*/
-        if (exist && taskArray.length / 4 == tasks && taskArray.length != 10) {
+        if (taskArray.length / 4 == tasks && taskArray.length != 10) {
             taskArray = Arrays.copyOf(taskArray, taskArray.length / 2);
         }
-        return exist;
     }
 
 
@@ -101,7 +150,7 @@ public class ArrayTaskList extends AbstractTaskList {
     }
 
     @Override
-    public int size(){
+    public int size() {
         return tasks;
     }
 

@@ -2,6 +2,9 @@ package ua.edu.sumdu.j2se.obolonsky.tasks;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
 /**
  * Doubly-linked {@code LinkedTaskList} represents a list of tasks.
  */
@@ -24,6 +27,12 @@ public class LinkedTaskList extends AbstractTaskList {
     public LinkedTaskList() {
     }
 
+    @NotNull
+    @Override
+    public Iterator<Task> iterator() {
+        return new TaskListIterator();
+    }
+
     /**
      * The inner class that represents a node of the list.
      */
@@ -36,6 +45,52 @@ public class LinkedTaskList extends AbstractTaskList {
             this.task = task;
             this.prev = prev;
             this.next = next;
+        }
+    }
+
+    private class TaskListIterator implements Iterator<Task> {
+        private Node cursor;
+        private Node next = first;
+
+        TaskListIterator() {
+        }
+
+        @Override
+        public boolean hasNext() {
+            return next != null;
+        }
+
+        @Override
+        public Task next() {
+            if (!hasNext())
+                throw new NoSuchElementException("The iteration has no more elements");
+
+            Task task = next.task;
+            cursor = next;
+            next = next.next;
+            return task;
+        }
+
+        @Override
+        public void remove() {
+            if (cursor == null) {
+                throw new IllegalStateException();
+            }
+
+            if (cursor.prev == null) {
+                first = cursor.next;
+            } else {
+                cursor.prev.next = cursor.next;
+            }
+
+            if (cursor.next == null) {
+                last = cursor.prev;
+            } else {
+                cursor.next.prev = cursor.prev;
+            }
+
+            tasks--;
+            cursor = null;
         }
     }
 
@@ -123,7 +178,7 @@ public class LinkedTaskList extends AbstractTaskList {
     }
 
     @Override
-    public int size(){
+    public int size() {
         return tasks;
     }
 
