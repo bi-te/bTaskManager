@@ -30,14 +30,14 @@ public class LinkedTaskList extends AbstractTaskList implements Cloneable{
 
     @NotNull
     @Override
-    public Iterator<Task> iterator() {
+    public TaskListIterator iterator() {
         return new TaskListIterator();
     }
 
     /**
      * The inner class that represents a node of the list.
      */
-    private class Node {
+    private class Node implements Cloneable{
         Node prev;
         Node next;
         Task task;
@@ -46,6 +46,13 @@ public class LinkedTaskList extends AbstractTaskList implements Cloneable{
             this.task = task;
             this.prev = prev;
             this.next = next;
+        }
+
+        @Override
+        public Node clone() throws CloneNotSupportedException{
+            Node node = (Node) super.clone();
+            task = task.clone();
+            return node;
         }
     }
 
@@ -236,5 +243,19 @@ public class LinkedTaskList extends AbstractTaskList implements Cloneable{
             result = 31 * result + (element == null ? 0 : element.hashCode());
 
         return result;
+    }
+
+    @Override
+    public LinkedTaskList clone() throws CloneNotSupportedException{
+        LinkedTaskList list = (LinkedTaskList) super.clone();
+        if (tasks == 0) return list;
+        first = first.clone();
+        Node node = first;
+        while (node.next != null){
+            node.next = node.next.clone();
+            node.next.prev = node;
+            node = node.next;
+        }
+        return list;
     }
 }
