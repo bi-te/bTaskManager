@@ -34,7 +34,7 @@ public class ArrayTaskList extends AbstractTaskList implements Cloneable {
     private class TaskArrayIterator implements Iterator<Task> {
         private int nextIndex;
         private int currentIndex;
-        boolean checked;
+        private boolean checked;
 
         TaskArrayIterator() {
         }
@@ -65,10 +65,6 @@ public class ArrayTaskList extends AbstractTaskList implements Cloneable {
             arrayModification(currentIndex);
             currentIndex--;
             nextIndex--;
-        }
-
-        public void replace(Task task){
-            taskArray[currentIndex] = task;
         }
     }
 
