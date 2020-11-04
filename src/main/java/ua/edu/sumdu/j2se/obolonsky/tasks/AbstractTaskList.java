@@ -1,12 +1,16 @@
 package ua.edu.sumdu.j2se.obolonsky.tasks;
 
-public abstract class AbstractTaskList {
+import java.util.Arrays;
+
+public abstract class AbstractTaskList implements Iterable<Task>{
+    protected int tasks;
+
 
     public abstract void add(Task task);
 
     public abstract boolean remove(Task task);
 
-    public abstract int size();
+    public int size(){return tasks;}
 
     public abstract Task getTask(int index);
 
@@ -20,7 +24,7 @@ public abstract class AbstractTaskList {
      * @param to   The end of the given period
      * @return The {LinkedTaskList}
      */
-    public AbstractTaskList incoming(int from, int to) {
+    public AbstractTaskList incoming(int from, int to){
         if (from < 0) {
             from = 0;
         }
@@ -29,7 +33,6 @@ public abstract class AbstractTaskList {
         if (from >= to) {
             return chosenTasks;
         }
-        int tasks = this.size();
         for (int i = 0; i < tasks; i++) {
             task = this.getTask(i);
             if (task.nextTimeAfter(from) > from
