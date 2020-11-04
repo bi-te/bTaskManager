@@ -2,9 +2,12 @@ package ua.edu.sumdu.j2se.obolonsky.tasks;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Objects;
+import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 /**
  * Doubly-linked {@code LinkedTaskList} represents a list of tasks.
@@ -193,6 +196,11 @@ public class LinkedTaskList extends AbstractTaskList implements Cloneable{
     @Override
     public ListTypes.types getType() {
         return ListTypes.types.LINKED;
+    }
+
+    @Override
+    public Stream<Task> getStream(){
+        return StreamSupport.stream(spliterator(), false);
     }
 
     /**

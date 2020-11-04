@@ -4,6 +4,7 @@ package ua.edu.sumdu.j2se.obolonsky.tasks;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
+import java.util.stream.Stream;
 
 /**
  * The {@code ArrayTaskList} class represents an array of tasks.
@@ -155,6 +156,11 @@ public class ArrayTaskList extends AbstractTaskList implements Cloneable {
     @Override
     public ListTypes.types getType() {
         return ListTypes.types.ARRAY;
+    }
+
+    @Override
+    public Stream<Task> getStream(){
+        return Arrays.stream(Arrays.copyOfRange(taskArray, 0, tasks));
     }
 
 
