@@ -68,8 +68,8 @@ public class Task implements Cloneable {
      * @param end      Time until which the task can be executed
      * @param interval The interval at which the task is executed
      * @throws IllegalArgumentException if {@code start} or {@code end}
-     *                                  is a negative number, or {@code interval} is a negative number or
-     *                                  equals to 0, or {@code start} is greater than {@code end}
+     * is a negative number, or {@code interval} is a negative number or
+     * equals to 0, or {@code start} is greater than {@code end}
      */
     public Task(String title, int start, int end, int interval) {
         if (start < 0) {
@@ -192,8 +192,8 @@ public class Task implements Cloneable {
      * @param end      The new value of {@code end}
      * @param interval The new value of {@code interval}
      * @throws IllegalArgumentException if {@code start} or {@code end}
-     *                                  is a negative number, or {@code interval} is a negative number or
-     *                                  equals to 0, or {@code start} is greater than {@code end}
+     * is a negative number, or {@code interval} is a negative number or
+     * equals to 0, or {@code start} is greater than {@code end}
      */
     public void setTime(int start, int end, int interval) {
         if (start < 0) {
