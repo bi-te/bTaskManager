@@ -3,7 +3,10 @@ package ua.edu.sumdu.j2se.obolonsky.tasks;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+import java.util.Objects;
 import java.util.stream.Stream;
 
 /**

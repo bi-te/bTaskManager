@@ -8,7 +8,7 @@ import java.util.Objects;
  * The {@code Task} class represent several types of tasks
  * and provides methods for manipulating them.
  */
-public class Task implements Cloneable{
+public class Task implements Cloneable {
 
     /**
      * The name of the task.
@@ -68,17 +68,17 @@ public class Task implements Cloneable{
      * @param end      Time until which the task can be executed
      * @param interval The interval at which the task is executed
      * @throws IllegalArgumentException if {@code start} or {@code end}
-     * is a negative number, or {@code interval} is a negative number or
-     * equals to 0, or {@code start} is greater than {@code end}
+     *                                  is a negative number, or {@code interval} is a negative number or
+     *                                  equals to 0, or {@code start} is greater than {@code end}
      */
     public Task(String title, int start, int end, int interval) {
         if (start < 0) {
             throw new IllegalArgumentException("start is less than zero");
         } else if (end < 0) {
             throw new IllegalArgumentException("end is less than zero");
-        } else if (interval <= 0){
+        } else if (interval <= 0) {
             throw new IllegalArgumentException("interval is less than or equal to zero");
-        } else if(start > end){
+        } else if (start > end) {
             throw new IllegalArgumentException("start is greater than end");
         }
 
@@ -192,17 +192,17 @@ public class Task implements Cloneable{
      * @param end      The new value of {@code end}
      * @param interval The new value of {@code interval}
      * @throws IllegalArgumentException if {@code start} or {@code end}
-     * is a negative number, or {@code interval} is a negative number or
-     * equals to 0, or {@code start} is greater than {@code end}
+     *                                  is a negative number, or {@code interval} is a negative number or
+     *                                  equals to 0, or {@code start} is greater than {@code end}
      */
     public void setTime(int start, int end, int interval) {
         if (start < 0) {
             throw new IllegalArgumentException("start is less than zero");
         } else if (end < 0) {
             throw new IllegalArgumentException("end is less than zero");
-        } else if (interval <= 0){
+        } else if (interval <= 0) {
             throw new IllegalArgumentException("interval is less than or equal to zero");
-        } else if(start > end){
+        } else if (start > end) {
             throw new IllegalArgumentException("start is greater than end");
         }
         this.start = start;
@@ -233,7 +233,7 @@ public class Task implements Cloneable{
      * {@code -1} if that time does not exist
      */
     public int nextTimeAfter(int current) {
-        if (current < 0){
+        if (current < 0) {
             current = 0;
         }
         /* pureIntervals = start + n * interval <= current; (n є N)
