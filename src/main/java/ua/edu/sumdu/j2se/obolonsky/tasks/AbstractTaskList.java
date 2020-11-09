@@ -1,6 +1,5 @@
 package ua.edu.sumdu.j2se.obolonsky.tasks;
 
-import java.util.Arrays;
 import java.util.stream.Stream;
 
 public abstract class AbstractTaskList implements Iterable<Task> {
