@@ -237,7 +237,7 @@ public class LinkedTaskList extends AbstractTaskList implements Cloneable{
         while (list1.hasNext() && list2.hasNext()){
             if (!Objects.equals(list1.next(), list2.next())){
                 return false;
-            };
+            }
         }
         return !list1.hasNext() && !list2.hasNext();
     }
