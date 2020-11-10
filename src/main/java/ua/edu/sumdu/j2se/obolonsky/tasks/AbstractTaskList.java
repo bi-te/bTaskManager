@@ -1,6 +1,5 @@
 package ua.edu.sumdu.j2se.obolonsky.tasks;
 
-import java.util.Arrays;
 import java.util.stream.Stream;
 
 public abstract class AbstractTaskList implements Iterable<Task> {
@@ -38,7 +37,7 @@ public abstract class AbstractTaskList implements Iterable<Task> {
             return chosenTasks;
         }
 
-        Stream<Task> stream = chosenTasks.getStream();
+        Stream<Task> stream = this.getStream();
         int finalFrom = from;
         stream.filter(t -> t.nextTimeAfter(finalFrom) > finalFrom && t.nextTimeAfter(finalFrom) <= to)
                 .forEach(chosenTasks::add);
