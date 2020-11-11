@@ -5,6 +5,8 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Objects;
+import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 /**
  * Doubly-linked {@code LinkedTaskList} represents a list of tasks.
@@ -195,6 +197,11 @@ public class LinkedTaskList extends AbstractTaskList implements Cloneable{
         return ListTypes.types.LINKED;
     }
 
+    @Override
+    public Stream<Task> getStream(){
+        return StreamSupport.stream(spliterator(), false);
+    }
+
     /**
      * Returns a string representation of the contents of the list.
      * The string representation consists of the list's elements,
@@ -230,7 +237,7 @@ public class LinkedTaskList extends AbstractTaskList implements Cloneable{
         while (list1.hasNext() && list2.hasNext()){
             if (!Objects.equals(list1.next(), list2.next())){
                 return false;
-            };
+            }
         }
         return !list1.hasNext() && !list2.hasNext();
     }
