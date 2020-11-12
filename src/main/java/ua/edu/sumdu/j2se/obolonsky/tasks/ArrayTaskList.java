@@ -122,14 +122,11 @@ public class ArrayTaskList extends AbstractTaskList implements Cloneable {
     }
 
     private void arrayModification(int index) {
-        /* if removed task was not the last, replaces the last task to the position of the removed one
-         * to make continuous sequence */
+
         for (; index < tasks; index++) {
             taskArray[index] = taskArray[index + 1];
         }
 
-        /* creates a new array with existing elements but with the length reduced twice
-         * to not take up extra space*/
         if (taskArray.length / 4 == tasks && taskArray.length != 10) {
             taskArray = Arrays.copyOf(taskArray, taskArray.length / 2);
         }

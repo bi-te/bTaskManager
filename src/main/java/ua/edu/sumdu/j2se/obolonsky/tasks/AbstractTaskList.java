@@ -20,29 +20,4 @@ public abstract class AbstractTaskList implements Iterable<Task> {
 
     public abstract Stream<Task> getStream();
 
-    /**
-     * Returns an {@code LinkedTaskList} or {@code ArrayTaskList} consists of tasks which are executed
-     * within specified time period .
-     *
-     * @param from The start of the given period
-     * @param to   The end of the given period
-     * @return The {LinkedTaskList}
-     */
-    final public AbstractTaskList incoming(int from, int to) {
-        if (from < 0) {
-            from = 0;
-        }
-        AbstractTaskList chosenTasks = TaskListFactory.createTaskList(this.getType());
-        if (from >= to) {
-            return chosenTasks;
-        }
-
-        Stream<Task> stream = this.getStream();
-        int finalFrom = from;
-        stream.filter(t -> t.nextTimeAfter(finalFrom) > finalFrom && t.nextTimeAfter(finalFrom) <= to)
-                .forEach(chosenTasks::add);
-
-        return chosenTasks;
-
-    }
 }

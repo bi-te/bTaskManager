@@ -2,6 +2,8 @@ package ua.edu.sumdu.j2se.obolonsky.tasks;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.Objects;
 
 /**
@@ -10,76 +12,30 @@ import java.util.Objects;
  */
 public class Task implements Cloneable {
 
-    /**
-     * The name of the task.
-     */
     private String title;
 
-    /**
-     * The time when non-repeatable task will be executed.
-     */
-    private int time;
+    private LocalDateTime time;
 
-    /**
-     * The interval at which the repeatable task is executed.
-     */
     private int interval;
 
-    /**
-     * Time when the repeatable task will be executed.
-     */
-    private int start;
+    private LocalDateTime start;
 
-    /**
-     * Time until which the repeatable task can be executed.
-     */
-    private int end;
+    private LocalDateTime end;
 
-    /**
-     * The status of activity of the task.
-     */
     private boolean active;
 
-    /**
-     * Initializes a newly created {@code Task} object that
-     * is non-repeatable and executes only once.
-     *
-     * @param title The name of the task
-     * @param time  Time when the task will be executed
-     * @throws IllegalArgumentException if {@code time} is a negative number
-     */
-    public Task(String title, int time) {
-        if (time < 0) {
-            throw new IllegalArgumentException("argument 'time' is below 0");
-        }
+    public Task(@NotNull String title, @NotNull LocalDateTime time) {
 
         this.title = title;
         this.time = time;
     }
 
-    /**
-     * Initializes a newly created {@code Task} object that
-     * is repeatable and executes several times within time
-     * period from {@code start} to {@code end} with fixed
-     * interval.
-     *
-     * @param title    The name of the task
-     * @param start    Time when the task will be executed
-     * @param end      Time until which the task can be executed
-     * @param interval The interval at which the task is executed
-     * @throws IllegalArgumentException if {@code start} or {@code end}
-     * is a negative number, or {@code interval} is a negative number or
-     * equals to 0, or {@code start} is greater than {@code end}
-     */
-    public Task(String title, int start, int end, int interval) {
-        if (start < 0) {
-            throw new IllegalArgumentException("start is less than zero");
-        } else if (end < 0) {
-            throw new IllegalArgumentException("end is less than zero");
-        } else if (interval <= 0) {
+    public Task(@NotNull String title, @NotNull LocalDateTime start,
+                @NotNull LocalDateTime end, int interval) {
+        if (interval <= 0) {
             throw new IllegalArgumentException("interval is less than or equal to zero");
-        } else if (start > end) {
-            throw new IllegalArgumentException("start is greater than end");
+        } else if (start.isAfter(end)) {
+            throw new IllegalArgumentException("start is after end");
         }
 
         this.title = title;
@@ -88,78 +44,35 @@ public class Task implements Cloneable {
         this.end = end;
     }
 
-    /**
-     * Returns the title of the task.
-     *
-     * @return the {@code title} of the task
-     */
     public String getTitle() {
         return title;
     }
 
-    /**
-     * Sets the title of object to the new specified {@code String} value.
-     *
-     * @param task The new value of the {@code title} of the task
-     */
     public void setTitle(@NotNull String task) {
         this.title = task;
     }
 
-    /**
-     * Returns the status of activity of the task.
-     *
-     * @return {@code true} if the task is active or {@code false} if no
-     */
     public boolean isActive() {
         return active;
     }
 
-    /**
-     * Sets the value of {@code active} to the new specified value.
-     *
-     * @param active The new value of the {@code active}
-     */
     public void setActive(boolean active) {
         this.active = active;
     }
 
-    /**
-     * Returns the value of {@code time} for non-repeatable task
-     * and the value of {@code start} for repeatable task.
-     *
-     * @return the {@code time} or the {@code start} value
-     */
-    public int getTime() {
-        return start != 0 ? start : time;
+    public LocalDateTime getTime() {
+        return start != null ? start : time;
     }
 
-    /**
-     * Sets the {@code time} of the non-repeatable task to the new specified
-     * {@code int} value. If the task is repeatable, makes it non-repeatable
-     * and sets the {@code time} value
-     *
-     * @param time The new value of {@code time}
-     * @throws IllegalArgumentException if {@code time} is a negative number
-     */
-    public void setTime(int time) {
-        if (time < 0) {
-            throw new IllegalArgumentException("argument 'time' is less than 0");
-        }
+    public void setTime(@NotNull LocalDateTime time) {
         this.time = time;
-        this.start = 0;
-        this.end = 0;
+        this.start = null;
+        this.end = null;
         this.interval = 0;
     }
 
-    /**
-     * Returns the value of {@code start} for repeatable task
-     * and the value of {@code time} for non-repeatable task.
-     *
-     * @return The {@code start} or the {@code time} value
-     */
-    public int getStartTime() {
-        return start != 0 ? start : time;
+    public LocalDateTime getStartTime() {
+        return start != null ? start : time;
     }
 
     /**
@@ -168,8 +81,8 @@ public class Task implements Cloneable {
      *
      * @return The {@code end} or the {@code time} value
      */
-    public int getEndTime() {
-        return end != 0 ? end : time;
+    public LocalDateTime getEndTime() {
+        return end != null ? end : time;
     }
 
     /**
@@ -192,23 +105,19 @@ public class Task implements Cloneable {
      * @param end      The new value of {@code end}
      * @param interval The new value of {@code interval}
      * @throws IllegalArgumentException if {@code start} or {@code end}
-     * is a negative number, or {@code interval} is a negative number or
-     * equals to 0, or {@code start} is greater than {@code end}
+     *                                  is a negative number, or {@code interval} is a negative number or
+     *                                  equals to 0, or {@code start} is greater than {@code end}
      */
-    public void setTime(int start, int end, int interval) {
-        if (start < 0) {
-            throw new IllegalArgumentException("start is less than zero");
-        } else if (end < 0) {
-            throw new IllegalArgumentException("end is less than zero");
-        } else if (interval <= 0) {
+    public void setTime(@NotNull LocalDateTime start, @NotNull LocalDateTime end, int interval) {
+        if (interval <= 0) {
             throw new IllegalArgumentException("interval is less than or equal to zero");
-        } else if (start > end) {
+        } else if (start.isAfter(end)) {
             throw new IllegalArgumentException("start is greater than end");
         }
         this.start = start;
         this.end = end;
         this.interval = interval;
-        this.time = 0;
+        this.time = null;
     }
 
     /**
@@ -232,28 +141,32 @@ public class Task implements Cloneable {
      * @return the time when the task will be executed next time or
      * {@code -1} if that time does not exist
      */
-    public int nextTimeAfter(int current) {
-        if (current < 0) {
-            current = 0;
+    public LocalDateTime nextTimeAfter(LocalDateTime current) {
+        if (current == null) {
+            throw new IllegalArgumentException("current is null");
         }
         /* pureIntervals = start + n * interval <= current; (n є N)
          *  pureIntervals <= current < pureIntervals + interval  */
-        int pureIntervals;
+        long pureIntervals;
+        LocalDateTime newDate;
         if (active) {
-            if (time != 0 && current < time) {
+            if (time != null && current.isBefore(time)) {
                 return time;
             }
-            if (start > current) {
+            if (start != null && current.isBefore(start)) {
                 return start;
             }
-            if (start != 0) {
-                pureIntervals = (current - ((current - start) % interval));
-                if (pureIntervals < end - interval) {
-                    return pureIntervals + interval;
+            if (start != null) {
+                pureIntervals = (current.toEpochSecond(ZoneOffset.UTC) - ((current.toEpochSecond(ZoneOffset.UTC)
+                        - start.toEpochSecond(ZoneOffset.UTC)) % interval));
+                newDate = LocalDateTime.ofEpochSecond(pureIntervals + interval,
+                        current.getNano(), ZoneOffset.UTC);
+                if (!newDate.isAfter(end)) {
+                    return newDate;
                 }
             }
         }
-        return -1;
+        return null;
     }
 
 
@@ -272,7 +185,7 @@ public class Task implements Cloneable {
     @Override
     public String toString() {
         String task;
-        if (time != 0) {
+        if (time != null) {
             task = this.title + ": " + time;
         } else {
             task = this.title + ": { start - " + start
