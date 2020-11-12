@@ -24,13 +24,13 @@ public class Task implements Cloneable {
 
     private boolean active;
 
-    public Task(@NotNull String title, @NotNull LocalDateTime time) {
+    public Task(String title, @NotNull LocalDateTime time) {
 
-        this.title = title;
+        this.title = (title == null) ? "Task 0": title;
         this.time = time;
     }
 
-    public Task(@NotNull String title, @NotNull LocalDateTime start,
+    public Task(String title, @NotNull LocalDateTime start,
                 @NotNull LocalDateTime end, int interval) {
         if (interval <= 0) {
             throw new IllegalArgumentException("interval is less than or equal to zero");
@@ -38,7 +38,7 @@ public class Task implements Cloneable {
             throw new IllegalArgumentException("start is after end");
         }
 
-        this.title = title;
+        this.title = (title == null) ? "Task 0": title;
         this.start = start;
         this.interval = interval;
         this.end = end;
@@ -48,8 +48,8 @@ public class Task implements Cloneable {
         return title;
     }
 
-    public void setTitle(@NotNull String task) {
-        this.title = task;
+    public void setTitle(String task) {
+        this.title = (task == null) ? "Task 0": task;
     }
 
     public boolean isActive() {
