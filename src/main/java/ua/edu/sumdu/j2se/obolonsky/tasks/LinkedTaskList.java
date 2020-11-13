@@ -112,7 +112,7 @@ public class LinkedTaskList extends AbstractTaskList implements Cloneable{
     @Override
     public void add(@NotNull Task task) {
         Node newTask = new Node(task, last, null);
-        final Node lastNode = last;
+        Node lastNode = last;
         last = newTask;
 
         if (lastNode == null) {
