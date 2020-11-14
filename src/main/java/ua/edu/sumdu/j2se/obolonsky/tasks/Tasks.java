@@ -60,7 +60,7 @@ public class Tasks {
                     startTime = startTime.plusSeconds(task.getRepeatInterval());
                 }
             } else {
-                if (!start.isAfter(end)) {
+                if (!start.isAfter(endTime)) {
                     if (map.containsKey(startTime)) {
                         map.get(startTime).add(task);
                     } else {

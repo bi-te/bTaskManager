@@ -14,8 +14,6 @@ import java.util.stream.Stream;
  */
 public class ArrayTaskList extends AbstractTaskList implements Cloneable {
 
-    private int tasks;
-
     /**
      * The array that stores {@code Task} objects.
      */
@@ -146,11 +144,6 @@ public class ArrayTaskList extends AbstractTaskList implements Cloneable {
             throw new IndexOutOfBoundsException("Index " + index + " out of bounds for length " + tasks);
         }
         return taskArray[index];
-    }
-
-    @Override
-    public int size() {
-        return tasks;
     }
 
     @Override
