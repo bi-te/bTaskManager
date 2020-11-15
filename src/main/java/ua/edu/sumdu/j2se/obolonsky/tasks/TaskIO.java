@@ -2,8 +2,8 @@ package ua.edu.sumdu.j2se.obolonsky.tasks;
 
 import com.google.gson.*;
 import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonToken;
 import com.google.gson.stream.JsonWriter;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.*;
 import java.lang.reflect.Type;
@@ -14,7 +14,7 @@ import java.time.ZoneOffset;
 public class TaskIO {
     // Binary
 
-    public static void write(AbstractTaskList tasks, OutputStream out) throws IOException {
+    public static void write(@NotNull AbstractTaskList tasks,@NotNull OutputStream out) throws IOException {
         DataOutputStream outStream = new DataOutputStream(out);
         outStream.writeInt(tasks.size());
         for (Task task : tasks) {
@@ -33,7 +33,7 @@ public class TaskIO {
         outStream.close();
     }
 
-    public static void read(AbstractTaskList tasks, InputStream in) throws IOException {
+    public static void read(@NotNull AbstractTaskList tasks,@NotNull InputStream in) throws IOException {
         DataInputStream inStream = new DataInputStream(in);
         int size = inStream.readInt();
         Task task;
@@ -60,8 +60,9 @@ public class TaskIO {
         inStream.close();
     }
 
-    public static void writeBinary(AbstractTaskList tasks, File file) throws IOException, FileNotFoundException {
-        DataOutputStream outStream = new DataOutputStream(new FileOutputStream(file));
+    public static void writeBinary(@NotNull AbstractTaskList tasks,@NotNull File file) throws IOException {
+        FileOutputStream fo = new FileOutputStream(file);
+        DataOutputStream outStream = new DataOutputStream(fo);
         outStream.writeInt(tasks.size());
         for (Task task : tasks) {
             outStream.writeInt(task.getTitle().length());
@@ -77,17 +78,20 @@ public class TaskIO {
             }
         }
         outStream.close();
+        fo.close();
     }
 
-    public static void readBinary(AbstractTaskList tasks, File file) throws IOException, FileNotFoundException {
-        DataInputStream inStream = new DataInputStream(new FileInputStream(file));
+    public static void readBinary(@NotNull AbstractTaskList tasks,@NotNull File file) throws IOException {
+        FileInputStream fi = new FileInputStream(file);
+        DataInputStream inStream = new DataInputStream(fi);
         int size = inStream.readInt();
         Task task;
         LocalDateTime start;
         LocalDateTime end;
+        byte[] b;
         for (; size > 0; size--) {
             int length = inStream.readInt() * 2;
-            byte[] b = new byte[length];
+            b = new byte[length];
             inStream.readFully(b, 0, length);
             String title = new String(b, 0, length, StandardCharsets.UTF_16);
             boolean active = inStream.readBoolean();
@@ -104,11 +108,12 @@ public class TaskIO {
             tasks.add(task);
         }
         inStream.close();
+        fi.close();
     }
 
     //Text
 
-    public static void write(AbstractTaskList tasks, Writer out) throws IOException {
+    public static void write(@NotNull AbstractTaskList tasks, @NotNull Writer out) throws IOException {
         Gson gson = createGson();
         JsonWriter jsonWriter = gson.newJsonWriter(out);
 
@@ -120,10 +125,9 @@ public class TaskIO {
         out.flush();
     }
 
-    public static void read(AbstractTaskList tasks, Reader in) throws IOException{
+    public static void read(@NotNull AbstractTaskList tasks, @NotNull Reader in) throws IOException{
         Gson gson = createGson();
         JsonReader jsonReader = gson.newJsonReader(in);
-        JsonToken token;
 
         jsonReader.beginArray();
         while (jsonReader.hasNext()){
@@ -132,7 +136,7 @@ public class TaskIO {
         jsonReader.endArray();
 
     }
-    public static void writeText(AbstractTaskList tasks, File file) throws IOException {
+    public static void writeText(@NotNull AbstractTaskList tasks,@NotNull File file) throws IOException {
         Gson gson = createGson();
         FileWriter fw = new FileWriter(file);
         JsonWriter jsonWriter = gson.newJsonWriter(fw);
@@ -147,7 +151,7 @@ public class TaskIO {
 
     }
 
-    public static void readText(AbstractTaskList tasks, File file) throws IOException {
+    public static void readText(@NotNull AbstractTaskList tasks,@NotNull File file) throws IOException {
         Gson gson = createGson();
         FileReader fr = new FileReader(file);
         JsonReader jsonReader = gson.newJsonReader(fr);
