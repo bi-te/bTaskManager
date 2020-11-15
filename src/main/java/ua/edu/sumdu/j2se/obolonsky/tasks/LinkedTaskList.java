@@ -22,8 +22,6 @@ public class LinkedTaskList extends AbstractTaskList implements Cloneable{
      */
     private Node last;
 
-    private int tasks;
-
     /**
      * Constructor that creates a new empty list.
      */
@@ -112,7 +110,7 @@ public class LinkedTaskList extends AbstractTaskList implements Cloneable{
     @Override
     public void add(@NotNull Task task) {
         Node newTask = new Node(task, last, null);
-        final Node lastNode = last;
+        Node lastNode = last;
         last = newTask;
 
         if (lastNode == null) {
@@ -185,11 +183,6 @@ public class LinkedTaskList extends AbstractTaskList implements Cloneable{
             }
         }
         return returnNode.task;
-    }
-
-    @Override
-    public int size() {
-        return tasks;
     }
 
     @Override
