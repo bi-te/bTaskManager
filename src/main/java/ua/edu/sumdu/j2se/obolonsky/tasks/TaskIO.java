@@ -14,7 +14,7 @@ import java.time.ZoneOffset;
 public class TaskIO {
     // Binary
 
-    public static void write(@NotNull AbstractTaskList tasks,@NotNull OutputStream out) throws IOException {
+    public static void write(@NotNull AbstractTaskList tasks, @NotNull OutputStream out) throws IOException {
         DataOutputStream outStream = new DataOutputStream(out);
         outStream.writeInt(tasks.size());
         for (Task task : tasks) {
@@ -33,7 +33,7 @@ public class TaskIO {
         outStream.close();
     }
 
-    public static void read(@NotNull AbstractTaskList tasks,@NotNull InputStream in) throws IOException {
+    public static void read(@NotNull AbstractTaskList tasks, @NotNull InputStream in) throws IOException {
         DataInputStream inStream = new DataInputStream(in);
         int size = inStream.readInt();
         Task task;
@@ -60,7 +60,7 @@ public class TaskIO {
         inStream.close();
     }
 
-    public static void writeBinary(@NotNull AbstractTaskList tasks,@NotNull File file) throws IOException {
+    public static void writeBinary(@NotNull AbstractTaskList tasks, @NotNull File file) throws IOException {
         FileOutputStream fo = new FileOutputStream(file);
         DataOutputStream outStream = new DataOutputStream(fo);
         outStream.writeInt(tasks.size());
@@ -81,7 +81,7 @@ public class TaskIO {
         fo.close();
     }
 
-    public static void readBinary(@NotNull AbstractTaskList tasks,@NotNull File file) throws IOException {
+    public static void readBinary(@NotNull AbstractTaskList tasks, @NotNull File file) throws IOException {
         FileInputStream fi = new FileInputStream(file);
         DataInputStream inStream = new DataInputStream(fi);
         int size = inStream.readInt();
@@ -118,31 +118,32 @@ public class TaskIO {
         JsonWriter jsonWriter = gson.newJsonWriter(out);
 
         jsonWriter.beginArray();
-        for (Task task: tasks){
+        for (Task task : tasks) {
             jsonWriter.jsonValue(gson.toJson(task));
         }
         jsonWriter.endArray();
         out.flush();
     }
 
-    public static void read(@NotNull AbstractTaskList tasks, @NotNull Reader in) throws IOException{
+    public static void read(@NotNull AbstractTaskList tasks, @NotNull Reader in) throws IOException {
         Gson gson = createGson();
         JsonReader jsonReader = gson.newJsonReader(in);
 
         jsonReader.beginArray();
-        while (jsonReader.hasNext()){
+        while (jsonReader.hasNext()) {
             tasks.add(gson.fromJson(jsonReader, Task.class));
         }
         jsonReader.endArray();
 
     }
-    public static void writeText(@NotNull AbstractTaskList tasks,@NotNull File file) throws IOException {
+
+    public static void writeText(@NotNull AbstractTaskList tasks, @NotNull File file) throws IOException {
         Gson gson = createGson();
         FileWriter fw = new FileWriter(file);
         JsonWriter jsonWriter = gson.newJsonWriter(fw);
 
         jsonWriter.beginArray();
-        for (Task task: tasks){
+        for (Task task : tasks) {
             jsonWriter.jsonValue(gson.toJson(task));
         }
         jsonWriter.endArray();
@@ -151,13 +152,13 @@ public class TaskIO {
 
     }
 
-    public static void readText(@NotNull AbstractTaskList tasks,@NotNull File file) throws IOException {
+    public static void readText(@NotNull AbstractTaskList tasks, @NotNull File file) throws IOException {
         Gson gson = createGson();
         FileReader fr = new FileReader(file);
         JsonReader jsonReader = gson.newJsonReader(fr);
 
         jsonReader.beginArray();
-        while (jsonReader.hasNext()){
+        while (jsonReader.hasNext()) {
             tasks.add(gson.fromJson(jsonReader, Task.class));
         }
         jsonReader.endArray();
