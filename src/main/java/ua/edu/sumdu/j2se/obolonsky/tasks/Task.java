@@ -2,6 +2,7 @@ package ua.edu.sumdu.j2se.obolonsky.tasks;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.Objects;
@@ -10,7 +11,7 @@ import java.util.Objects;
  * The {@code Task} class represent several types of tasks
  * and provides methods for manipulating them.
  */
-public class Task implements Cloneable {
+public class Task implements Cloneable, Serializable {
 
     private String title;
 
