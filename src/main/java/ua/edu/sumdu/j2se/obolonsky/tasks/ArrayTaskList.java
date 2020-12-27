@@ -25,6 +25,7 @@ public class ArrayTaskList extends AbstractTaskList implements Cloneable {
      */
     public ArrayTaskList() {
         taskArray = new Task[10];
+        getClass().getModifiers();
     }
 
     @NotNull
@@ -67,6 +68,7 @@ public class ArrayTaskList extends AbstractTaskList implements Cloneable {
             arrayModification(currentIndex);
             currentIndex--;
             nextIndex--;
+            checked = false;
         }
     }
 
@@ -153,19 +155,9 @@ public class ArrayTaskList extends AbstractTaskList implements Cloneable {
 
     @Override
     public Stream<Task> getStream(){
-        return Arrays.stream(Arrays.copyOfRange(taskArray, 0, tasks));
+        return Arrays.stream(taskArray, 0, tasks);
     }
 
-
-    /**
-     * Returns a string representation of the contents of the array.
-     * The string representation consists of a list of the array's elements,
-     * enclosed in square brackets ({@code "[]"}).  Adjacent elements are
-     * separated by the characters {@code ", "} (a comma followed by a
-     * space).
-     *
-     * @return A string representation of the array
-     */
     @Override
     public String toString() {
         if (tasks == 0) {

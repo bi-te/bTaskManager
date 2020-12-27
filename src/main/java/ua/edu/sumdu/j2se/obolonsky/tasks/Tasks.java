@@ -33,8 +33,7 @@ public class Tasks {
     public static SortedMap<LocalDateTime, Set<Task>> calendar(@NotNull Iterable<Task> tasks,
                                                                @NotNull LocalDateTime start,
                                                                @NotNull LocalDateTime end) {
-        SortedMap<LocalDateTime, Set<Task>> map = new TreeMap<>();
-
+        TreeMap<LocalDateTime, Set<Task>> map = new TreeMap<>();
         LocalDateTime endTime;
         LocalDateTime startTime;
         for (Task task : tasks) {
