@@ -1,4 +1,4 @@
-package my.test.fx;
+package ua.edu.sumdu.j2se.obolonsky.app;
 
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -8,7 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import tasks.*;
+import ua.edu.sumdu.j2se.obolonsky.tasks.*;
 
 import java.awt.*;
 

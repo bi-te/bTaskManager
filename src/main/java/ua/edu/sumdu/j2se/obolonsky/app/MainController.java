@@ -1,4 +1,4 @@
-package my.test.fx;
+package ua.edu.sumdu.j2se.obolonsky.app;
 
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
@@ -15,8 +15,8 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import tasks.Task;
-import tasks.Tasks;
+import ua.edu.sumdu.j2se.obolonsky.tasks.Task;
+import ua.edu.sumdu.j2se.obolonsky.tasks.Tasks;
 
 import java.io.IOException;
 import java.time.LocalDate;
