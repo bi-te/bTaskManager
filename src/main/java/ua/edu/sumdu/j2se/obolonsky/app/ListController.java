@@ -20,7 +20,6 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Map;
 import java.util.Set;
-import java.util.SortedMap;
 
 public class ListController {
 
@@ -117,7 +116,7 @@ public class ListController {
     @FXML
     private ComboBox<Integer> minutes2;
 
-    private App app;
+    private final App app = App.getInstance();
 
     @FXML
     void initialize() {
@@ -143,10 +142,6 @@ public class ListController {
         }
     }
 
-    public void setApp(App app) {
-        this.app = app;
-    }
-
     private void showMainScene() {
         try {
             Stage stage = (Stage) back.getScene().getWindow();
@@ -155,9 +150,6 @@ public class ListController {
             loader.load();
             stage.setScene(new Scene(loader.getRoot()));
 
-            MainController controller = loader.getController();
-            controller.setApp(app);
-            controller.newNextTask();
 
         } catch (IOException e){
             e.printStackTrace();

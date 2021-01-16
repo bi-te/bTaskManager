@@ -21,7 +21,7 @@ public abstract class TaskTimer extends Timer {
         super(b);
     }
 
-    public void setTimer(AbstractTaskList list) {
+    public void scheduleTimer(AbstractTaskList list) {
         for (Task t : list) {
             if (t.isActive()) {
                 add(t);

@@ -100,11 +100,12 @@ public class MainController {
     @FXML
     private ComboBox<String> intervalType;
 
-    private App app;
+    private App app = App.getInstance();
 
 
     @FXML
     void initialize() {
+        newNextTask();
         radioGroup();
 
         addButton.setOnAction(actionEvent -> {
@@ -153,10 +154,6 @@ public class MainController {
 
     }
 
-    public void setApp(App app) {
-        this.app = app;
-    }
-
     public void newNextTask(){
         app.firstProperty().addListener(new ChangeListener<String>() {
             @Override
@@ -189,7 +186,6 @@ public class MainController {
 
             stage.setScene(new Scene(loader.getRoot()));
             ListController controller = loader.getController();
-            controller.setApp(app);
             controller.setView();
         } catch (IOException e){
             e.printStackTrace();

@@ -119,7 +119,7 @@ public class Task implements Cloneable, Serializable {
                 pureIntervals = (current.toEpochSecond(ZoneOffset.UTC) - ((current.toEpochSecond(ZoneOffset.UTC)
                         - start.toEpochSecond(ZoneOffset.UTC)) % interval));
                 newDate = LocalDateTime.ofEpochSecond(pureIntervals + interval,
-                        current.getNano(), ZoneOffset.UTC);
+                        0, ZoneOffset.UTC);
                 if (!newDate.isAfter(end)) {
                     return newDate;
                 }
