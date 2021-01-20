@@ -1,7 +1,10 @@
 package ua.edu.sumdu.j2se.obolonsky.app;
 
+import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import ua.edu.sumdu.j2se.obolonsky.tasks.*;
 
 import java.awt.*;
@@ -12,6 +15,7 @@ import java.time.LocalDateTime;
 import java.util.*;
 
 public class App {
+    public final static Logger logger = LogManager.getLogger("App");
 
     private boolean schedule;
     private AbstractTaskList list = new LinkedTaskList();
@@ -46,6 +50,7 @@ public class App {
                                 cancel();
                                 timer.purge();
                             }
+                            logger.info("Task executed");
                         }
                     };
                     return timerTask;
@@ -59,7 +64,7 @@ public class App {
                 setFirst("Next task");
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error("Couldn`t read from file saves.json", e);
         }
     }
 

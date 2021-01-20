@@ -6,19 +6,22 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import ua.edu.sumdu.j2se.obolonsky.tasks.TaskIO;
 
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 
 public class StartUp extends Application {
     App app = App.getInstance();
+    private final Logger logger = LogManager.getLogger("App");
 
     @Override
     public void start(Stage stage) {
         try {
-
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("/app.fxml"));
             loader.load();
@@ -31,7 +34,7 @@ public class StartUp extends Application {
 
             tray(stage);
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error("Error occurred while creating the window",e);
         }
 
     }
@@ -39,7 +42,7 @@ public class StartUp extends Application {
         Platform.setImplicitExit(false);
 
         if (!SystemTray.isSupported()) {
-            System.out.println("SystemTray is not supported");
+            logger.warn("SystemTray is not supported");
             return;
         }
         PopupMenu popup = new PopupMenu();
@@ -57,7 +60,7 @@ public class StartUp extends Application {
         try {
             tray.add(trayIcon);
         } catch (AWTException e) {
-            e.printStackTrace();
+            logger.error("Couldn`t add a tray icon", e);
         }
 
         trayIcon.addActionListener(e -> Platform.runLater(stage::show));
@@ -73,7 +76,7 @@ public class StartUp extends Application {
         try {
             TaskIO.writeText(app.getList(), new File("saves.json"));
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error("Couldn`t save tasks to file", e);
         }
     }
 

@@ -120,12 +120,13 @@ public class ListController {
 
     @FXML
     void initialize() {
+        setView();
         back.setOnAction(actionEvent -> showMainScene());
 
         radioGroup();
     }
 
-    public void setView() {
+    private void setView() {
         if (app.isSchedule()) {
             schedulePeriod();
             veil.setVisible(true);

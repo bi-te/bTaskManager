@@ -104,7 +104,7 @@ public class MainController {
 
 
     @FXML
-    void initialize() {
+    private void initialize() {
         newNextTask();
         radioGroup();
 
@@ -154,7 +154,7 @@ public class MainController {
 
     }
 
-    public void newNextTask(){
+    private void newNextTask(){
         app.firstProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
@@ -185,8 +185,6 @@ public class MainController {
             loader.load();
 
             stage.setScene(new Scene(loader.getRoot()));
-            ListController controller = loader.getController();
-            controller.setView();
         } catch (IOException e){
             e.printStackTrace();
         }
