@@ -1,6 +1,5 @@
 package ua.edu.sumdu.j2se.obolonsky.app;
 
-import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import org.apache.logging.log4j.LogManager;
@@ -15,7 +14,7 @@ import java.time.LocalDateTime;
 import java.util.*;
 
 public class App {
-    public final static Logger logger = LogManager.getLogger("App");
+    private final static Logger logger = LogManager.getLogger("App");
 
     private boolean schedule;
     private AbstractTaskList list = new LinkedTaskList();
@@ -101,6 +100,10 @@ public class App {
         }
 
         setFirst(s.toString());
+    }
+
+    public static Logger getLogger(){
+        return  logger;
     }
 
     public boolean isSchedule() {
