@@ -17,7 +17,7 @@ import java.util.Arrays;
 
 public class StartUp extends Application {
     App app = App.getInstance();
-    private final Logger logger = LogManager.getLogger("App");
+    private final Logger logger = App.logger;
 
     @Override
     public void start(Stage stage) {
