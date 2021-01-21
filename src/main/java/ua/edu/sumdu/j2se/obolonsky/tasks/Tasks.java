@@ -33,42 +33,66 @@ public class Tasks {
     public static SortedMap<LocalDateTime, Set<Task>> calendar(@NotNull Iterable<Task> tasks,
                                                                @NotNull LocalDateTime start,
                                                                @NotNull LocalDateTime end) {
-        SortedMap<LocalDateTime, Set<Task>> map = new TreeMap<>();
+        TreeMap<LocalDateTime, Set<Task>> map = new TreeMap<>();
 
+        for (Task task : tasks) {
+            addTask(map, task, start, end);
+        }
+
+        return map;
+    }
+
+    public static void addTask(@NotNull SortedMap<LocalDateTime, Set<Task>> map, @NotNull Task task,
+                               @NotNull LocalDateTime start,
+                               @NotNull LocalDateTime end){
         LocalDateTime endTime;
         LocalDateTime startTime;
-        for (Task task : tasks) {
 
-            if (task.getEndTime().isBefore(end)) {
-                endTime = task.getEndTime();
-            } else {
-                endTime = end;
-            }
+        if (task.getEndTime().isBefore(end)) {
+            endTime = task.getEndTime();
+        } else {
+            endTime = end;
+        }
 
-            startTime = task.nextTimeAfter(start);
-            if (startTime == null) {
-                continue;
-            }
+        startTime = task.nextTimeAfter(start);
+        if (startTime == null) {
+            return;
+        }
 
-            if (task.isRepeated()) {
-                while (!startTime.isAfter(endTime)) {
-                    if (map.containsKey(startTime)) {
-                        map.get(startTime).add(task);
-                    } else {
-                        map.put(startTime, new HashSet<>(Collections.singletonList(task)));
-                    }
-                    startTime = startTime.plusSeconds(task.getRepeatInterval());
+        if (task.isRepeated()) {
+            while (!startTime.isAfter(endTime)) {
+                if (map.containsKey(startTime)) {
+                    map.get(startTime).add(task);
+                } else {
+                    map.put(startTime, new HashSet<>(Collections.singletonList(task)));
                 }
-            } else {
-                if (!start.isAfter(endTime)) {
-                    if (map.containsKey(startTime)) {
-                        map.get(startTime).add(task);
-                    } else {
-                        map.put(startTime, new HashSet<>(Collections.singletonList(task)));
-                    }
+                startTime = startTime.plusSeconds(task.getRepeatInterval());
+            }
+        } else {
+            if (!start.isAfter(endTime)) {
+                if (map.containsKey(startTime)) {
+                    map.get(startTime).add(task);
+                } else {
+                    map.put(startTime, new HashSet<>(Collections.singletonList(task)));
                 }
             }
         }
-        return map;
+    }
+
+    public static void deleteTask(@NotNull SortedMap<LocalDateTime, Set<Task>> map, @NotNull Task task){
+        LocalDateTime startTime = task.getStartTime();
+        do {
+            if(map.containsKey(startTime)){
+                Set<Task> s = map.get(startTime);
+                s.remove(task);
+                if(s.size() == 0){
+                    map.remove(startTime);
+                }
+            }
+            if (!task.isRepeated()){
+                break;
+            }
+            startTime = startTime.plusSeconds(task.getRepeatInterval());
+        } while (!startTime.isAfter(task.getEndTime()));
     }
 }

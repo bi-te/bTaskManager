@@ -20,5 +20,4 @@ public abstract class AbstractTaskList implements Iterable<Task>, Serializable {
     public abstract ListTypes.types getType();
 
     public abstract Stream<Task> getStream();
-
 }

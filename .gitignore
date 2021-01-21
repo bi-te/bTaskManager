@@ -1,8 +1,9 @@
+src/main/resources/log4j2.properties
 /src/test/
+logs/
 NCTaskManager.iml
 /target/
 /docs/
 docs.bat
-/src/main/java/ua/edu/sumdu/j2se/obolonsky/tasks/Main.java
-test.json
+saves.json
 test.txt

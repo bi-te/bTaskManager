@@ -102,11 +102,6 @@ public class LinkedTaskList extends AbstractTaskList implements Cloneable{
         }
     }
 
-    /**
-     * Appends the specified element to the end of the list.
-     *
-     * @param task The new {@code Task} element
-     */
     @Override
     public void add(@NotNull Task task) {
         Node newTask = new Node(task, last, null);
@@ -195,15 +190,6 @@ public class LinkedTaskList extends AbstractTaskList implements Cloneable{
         return StreamSupport.stream(spliterator(), false);
     }
 
-    /**
-     * Returns a string representation of the contents of the list.
-     * The string representation consists of the list's elements,
-     * enclosed in square brackets ({@code "[]"}).  Adjacent elements are
-     * separated by the characters {@code ", "} (a comma followed by a
-     * space).
-     *
-     * @return A string representation of the list.
-     */
     @Override
     public String toString() {
         if (tasks == 0) {

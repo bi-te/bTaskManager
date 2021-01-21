@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="748.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ua.edu.sumdu.j2se.obolonsky.app.MainController">
+    <Label fx:id="nextTask" layoutX="42.0" layoutY="76.0" prefHeight="174.0" prefWidth="364.0" style="-fx-border-color: #696856;" text="Text">
+        <font>
+            <Font name="Copperplate Gothic Bold" size="17.0" />
+        </font>
+    </Label>
+    <Button fx:id="addButton" layoutX="171.0" layoutY="284.0" mnemonicParsing="false" pickOnBounds="false" prefHeight="84.0" prefWidth="84.0" style="-fx-background-radius: 84; -fx-background-color: #d2d2d2;">
+        <graphic>
+            <ImageView fitHeight="84.0" fitWidth="84.0" nodeOrientation="INHERIT" pickOnBounds="true" style="-fx-background-radius: 100;">
+                <Image url="@assets/addButton.png" />
+            </ImageView>
+        </graphic>
+    </Button>
+    <Button fx:id="listView" layoutX="455.0" layoutY="28.0" mnemonicParsing="false" prefHeight="118.0" prefWidth="258.0" text="List">
+        <font>
+            <Font size="24.0" />
+        </font>
+    </Button>
+    <Button fx:id="schedule" layoutX="455.0" layoutY="174.0" mnemonicParsing="false" prefHeight="118.0" prefWidth="258.0" text="Schedule">
+        <font>
+            <Font size="24.0" />
+        </font>
+    </Button>
+    <Region fx:id="veil" opacity="0.37" prefHeight="400.0" prefWidth="748.0" style="-fx-background-color: grey;" visible="false" />
+    <Pane fx:id="newTask" layoutX="110.0" layoutY="36.0" prefHeight="204.0" prefWidth="528.0" style="-fx-background-color: grey;" visible="false">
+        <Text fx:id="error" fill="#f00000" layoutX="340.0" layoutY="158.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Interval must be a number" visible="false" wrappingWidth="84.0">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Text>
+
+        <TextField fx:id="title" layoutX="188.0" layoutY="25.0" promptText="task title" style="-fx-background-color: white;" />
+        <DatePicker fx:id="startDate" layoutX="174.0" layoutY="106.0" />
+        <ComboBox fx:id="startHours" layoutX="188.0" layoutY="148.0" prefHeight="28.0" prefWidth="62.0" />
+        <RadioButton fx:id="nonRepeated" layoutX="340.0" layoutY="62.0" mnemonicParsing="false" text="Non-repeated task" />
+        <ComboBox fx:id="startMinutes" layoutX="267.0" layoutY="148.0" prefHeight="28.0" prefWidth="62.0" />
+        <ToggleButton fx:id="active" layoutX="437.0" layoutY="103.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="62.0" text="active" />
+        <RadioButton fx:id="repeated" layoutX="57.0" layoutY="62.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="131.0" text="Repeated task" />
+        <Button fx:id="create" alignment="BOTTOM_LEFT" layoutX="437.0" layoutY="146.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="62.0" text="Create" />
+        <ComboBox fx:id="endHours" layoutX="188.0" layoutY="239.0" prefHeight="28.0" prefWidth="62.0" visible="false" />
+        <ComboBox fx:id="endMinutes" layoutX="267.0" layoutY="239.0" prefHeight="28.0" prefWidth="62.0" visible="false" />
+        <DatePicker fx:id="endDate" layoutX="174.0" layoutY="199.0" visible="false" />
+        <TextField fx:id="interval" layoutX="158.0" layoutY="285.0" prefHeight="26.0" prefWidth="74.0" style="-fx-background-color: white;" visible="false" />
+        <Text layoutX="20.0" layoutY="124.0" strokeType="OUTSIDE" strokeWidth="0.0" text="start :" wrappingWidth="74.20000457763672">
+            <font>
+                <Font size="16.0" />
+            </font>
+        </Text>
+        <Text layoutX="112.0" layoutY="124.0" strokeType="OUTSIDE" strokeWidth="0.0" text="date:" wrappingWidth="43.3515625">
+            <font>
+                <Font size="16.0" />
+            </font>
+        </Text>
+        <Text layoutX="112.0" layoutY="168.0" strokeType="OUTSIDE" strokeWidth="0.0" text="time:" wrappingWidth="62.0">
+            <font>
+                <Font size="16.0" />
+            </font>
+        </Text>
+        <Text fx:id="endDateText" layoutX="112.0" layoutY="218.0" strokeType="OUTSIDE" strokeWidth="0.0" text="date:" visible="false" wrappingWidth="43.3515625">
+            <font>
+                <Font size="16.0" />
+            </font>
+        </Text>
+        <Text fx:id="endTimeText" layoutX="112.0" layoutY="259.0" strokeType="OUTSIDE" strokeWidth="0.0" text="time:" visible="false" wrappingWidth="62.0">
+            <font>
+                <Font size="16.0" />
+            </font>
+        </Text>
+        <Text fx:id="end" layoutX="20.0" layoutY="218.0" strokeType="OUTSIDE" strokeWidth="0.0" text="end :" visible="false" wrappingWidth="74.20000457763672">
+            <font>
+                <Font size="16.0" />
+            </font>
+        </Text>
+        <Text fx:id="intervalText" layoutX="14.0" layoutY="299.0" strokeType="OUTSIDE" strokeWidth="0.0" text="interval of repeating:" visible="false" wrappingWidth="144.19739074707036">
+            <font>
+                <Font size="15.0" />
+            </font>
+        </Text>
+        <Button fx:id="cancelButton" layoutX="14.0" layoutY="13.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="62.0" text="cancel" />
+        <ComboBox fx:id="intervalType" layoutX="238.0" layoutY="284.0" prefHeight="28.0" prefWidth="91.0" visible="false" />
+    </Pane>
+</AnchorPane>
