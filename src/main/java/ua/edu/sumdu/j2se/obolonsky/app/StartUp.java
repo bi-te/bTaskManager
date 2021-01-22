@@ -72,7 +72,7 @@ public class StartUp extends Application {
     @Override
     public void stop() {
         try {
-            TaskIO.writeText(app.getList(), new File("saves.json"));
+            TaskIO.writeText(app.getList(), app.getSaves());
         } catch (IOException e) {
             logger.error("Couldn`t save tasks to file", e);
         }

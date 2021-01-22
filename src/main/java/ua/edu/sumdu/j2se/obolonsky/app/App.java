@@ -16,6 +16,8 @@ import java.util.*;
 public class App {
     private final static Logger logger = LogManager.getLogger("App");
 
+    private final File saves = new File("saves.json");
+
     private boolean schedule;
     private AbstractTaskList list = new LinkedTaskList();
     private TaskTimer timer;
@@ -26,7 +28,7 @@ public class App {
 
     private App() {
         try {
-            TaskIO.readText(list, new File("saves.json"));
+            TaskIO.readText(list, saves);
             timer = new TaskTimer(true) {
                 @Override
                 public TimerTask newTimerTask(Task task) {
@@ -104,6 +106,10 @@ public class App {
 
     public static Logger getLogger(){
         return  logger;
+    }
+
+    public File getSaves(){
+        return saves;
     }
 
     public boolean isSchedule() {
