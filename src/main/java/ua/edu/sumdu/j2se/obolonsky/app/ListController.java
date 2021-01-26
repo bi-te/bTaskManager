@@ -119,6 +119,9 @@ public class ListController {
     private final int minSec = 60;
     private final int hourSec = 3600;
     private final int daySec = 86400;
+
+    private final Font labelFont = new Font("System", 20);
+
     private final App app = App.getInstance();
 
     @FXML
@@ -163,7 +166,7 @@ public class ListController {
     private AnchorPane newTaskPane(Task task) {
         Label l = new Label();
         labelTaskCreation(l, task);
-        l.setFont(new Font("System", 20));
+        l.setFont(labelFont);
 
         MenuButton b = new MenuButton("...");
 
@@ -250,7 +253,7 @@ public class ListController {
     private AnchorPane newTimePane(String s) {
         Label l = new Label(s);
         l.setPrefHeight(60);
-        l.setFont(new Font("System", 20));
+        l.setFont(labelFont);
 
         AnchorPane p = new AnchorPane(l);
         p.setPrefHeight(60);
