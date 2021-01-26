@@ -27,6 +27,8 @@ public class ListController {
     private Button back;
 
     @FXML
+    private Button back1;
+    @FXML
     private ScrollPane taskList;
 
     @FXML
@@ -152,6 +154,8 @@ public class ListController {
                     date.setVisible(false);
                 }
             });
+
+            back1.setOnAction(actionEvent -> showMainScene());
         } else {
             listConfiguration();
         }
