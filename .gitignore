@@ -7,3 +7,5 @@ NCTaskManager.iml
 docs.bat
 saves.json
 test.txt
+bTaskManager.iml
+dependency-reduced-pom.xml
