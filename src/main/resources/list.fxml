@@ -17,49 +17,50 @@
     <Button fx:id="back" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="74.0" text="back" />
     <ScrollPane fx:id="taskList" hbarPolicy="NEVER" layoutX="27.0" layoutY="66.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="298.0" prefWidth="695.0" vbarPolicy="ALWAYS" />
     <Region fx:id="veil" opacity="0.44" prefHeight="400.0" prefWidth="748.0" style="-fx-background-color: grey;" visible="false" />
-    <Pane fx:id="date" layoutX="218.0" layoutY="36.0" prefHeight="326.0" prefWidth="310.0" style="-fx-background-color: grey;" visible="false">
-        <DatePicker fx:id="date1" layoutX="81.0" layoutY="57.0" />
-        <DatePicker fx:id="date2" layoutX="81.0" layoutY="175.0" />
-        <Button fx:id="ok" layoutX="128.0" layoutY="270.0" mnemonicParsing="false" text="OK" />
-        <ComboBox fx:id="hours1" layoutX="81.0" layoutY="105.0" prefHeight="28.0" prefWidth="62.0" />
-        <ComboBox fx:id="minutes1" layoutX="150.0" layoutY="105.0" prefHeight="28.0" prefWidth="62.0" />
-        <ComboBox fx:id="hours2" layoutX="81.0" layoutY="225.0" prefHeight="28.0" prefWidth="62.0" />
-        <ComboBox fx:id="minutes2" layoutX="150.0" layoutY="225.0" prefHeight="28.0" prefWidth="62.0" />
-        <Text layoutX="33.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="From:" wrappingWidth="43.3515625">
+    <Pane fx:id="date" layoutX="218.0" layoutY="33.0" prefHeight="329.0" prefWidth="310.0" style="-fx-background-color: grey;" visible="false">
+        <DatePicker fx:id="date1" layoutX="81.0" layoutY="69.0" />
+        <DatePicker fx:id="date2" layoutX="81.0" layoutY="187.0" />
+        <Button fx:id="ok" layoutX="128.0" layoutY="282.0" mnemonicParsing="false" text="OK" />
+        <ComboBox fx:id="hours1" layoutX="81.0" layoutY="117.0" prefHeight="28.0" prefWidth="62.0" />
+        <ComboBox fx:id="minutes1" layoutX="150.0" layoutY="117.0" prefHeight="28.0" prefWidth="62.0" />
+        <ComboBox fx:id="hours2" layoutX="81.0" layoutY="237.0" prefHeight="28.0" prefWidth="62.0" />
+        <ComboBox fx:id="minutes2" layoutX="150.0" layoutY="237.0" prefHeight="28.0" prefWidth="62.0" />
+        <Text layoutX="33.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text="From:" wrappingWidth="43.3515625">
             <font>
                 <Font size="15.0" />
             </font>
         </Text>
-        <Text layoutX="33.0" layoutY="168.0" strokeType="OUTSIDE" strokeWidth="0.0" text="To:" wrappingWidth="43.3515625">
+        <Text layoutX="33.0" layoutY="180.0" strokeType="OUTSIDE" strokeWidth="0.0" text="To:" wrappingWidth="43.3515625">
             <font>
                 <Font size="15.0" />
             </font>
         </Text>
-        <Text layoutX="33.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date:" wrappingWidth="43.3515625">
+        <Text layoutX="33.0" layoutY="88.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date:" wrappingWidth="43.3515625">
             <font>
                 <Font size="15.0" />
             </font>
         </Text>
-        <Text layoutX="33.0" layoutY="124.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Time:" wrappingWidth="43.3515625">
+        <Text layoutX="33.0" layoutY="136.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Time:" wrappingWidth="43.3515625">
             <font>
                 <Font size="15.0" />
             </font>
         </Text>
-        <Text layoutX="33.0" layoutY="194.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date:" wrappingWidth="43.3515625">
+        <Text layoutX="33.0" layoutY="206.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date:" wrappingWidth="43.3515625">
             <font>
                 <Font size="15.0" />
             </font>
         </Text>
-        <Text layoutX="33.0" layoutY="245.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Time:" wrappingWidth="43.3515625">
+        <Text layoutX="33.0" layoutY="257.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Time:" wrappingWidth="43.3515625">
             <font>
                 <Font size="15.0" />
             </font>
         </Text>
-        <Text fx:id="errorSchedule" fill="#e40f0f" layoutX="188.0" layoutY="278.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Set appropriate time " visible="false" wrappingWidth="108.0">
+        <Text fx:id="errorSchedule" fill="#e40f0f" layoutX="188.0" layoutY="290.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Set appropriate time " visible="false" wrappingWidth="108.0">
             <font>
                 <Font size="15.0" />
             </font>
         </Text>
+      <Button fx:id="back1" layoutX="18.0" layoutY="8.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="74.0" text="cancel" />
     </Pane>
     <Pane fx:id="newTask" layoutX="110.0" layoutY="36.0" prefHeight="188.0" prefWidth="528.0" style="-fx-background-color: grey;" visible="false">
 

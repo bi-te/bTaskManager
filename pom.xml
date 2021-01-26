@@ -66,7 +66,8 @@
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>0.0.5</version>
                 <configuration>
-                    <mainClass>my.test.fx.App</mainClass>
+                    <jlinkImageName>TaskManager</jlinkImageName>
+                    <mainClass>ua.edu.sumdu.j2se.obolonsky.app.StartUp</mainClass>
                 </configuration>
             </plugin>
         </plugins>
