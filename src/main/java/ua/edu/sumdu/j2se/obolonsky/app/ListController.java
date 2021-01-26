@@ -87,6 +87,9 @@ public class ListController {
     private Text error;
 
     @FXML
+    private Text errorSchedule;
+
+    @FXML
     private Button cancelButton;
 
     @FXML
@@ -139,10 +142,15 @@ public class ListController {
             date.setVisible(true);
 
             ok.setOnAction(actionEvent -> {
-
-                listConfiguration();
-                veil.setVisible(false);
-                date.setVisible(false);
+                if (LocalDateTime.of(date1.getValue(), LocalTime.of(hours1.getValue(), minutes1.getValue()))
+                        .isAfter(LocalDateTime.of(date2.getValue(), LocalTime.of(hours2.getValue(), minutes2.getValue())))){
+                    errorSchedule.setVisible(true);
+                } else {
+                    listConfiguration();
+                    errorSchedule.setVisible(false);
+                    veil.setVisible(false);
+                    date.setVisible(false);
+                }
             });
         } else {
             listConfiguration();
