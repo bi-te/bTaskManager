@@ -116,6 +116,10 @@ public class ListController {
     @FXML
     private ComboBox<Integer> minutes2;
 
+    private final int minSec = 60;
+    private final int hourSec = 3600;
+    private final int daySec = 86400;
+
     private final Font labelFont = new Font("System", 20);
 
     private final App app = App.getInstance();
@@ -265,14 +269,14 @@ public class ListController {
                 String s = task.getTitle() + " : \n" + task.getStartTime() + "  "
                         + task.getEndTime() + "  ";
 
-                if (task.getRepeatInterval() / 86400 > 0) {
-                    s += task.getRepeatInterval() / 86400 + " days";
+                if (task.getRepeatInterval() / daySec > 0) {
+                    s += task.getRepeatInterval() / daySec + " days";
 
-                } else if (task.getRepeatInterval() / 3600 > 0) {
-                    s += task.getRepeatInterval() / 3600 + " hours";
+                } else if (task.getRepeatInterval() / hourSec > 0) {
+                    s += task.getRepeatInterval() / hourSec + " hours";
 
                 } else {
-                    s += task.getRepeatInterval() / 60 + " minutes";
+                    s += task.getRepeatInterval() / minSec + " minutes";
                 }
                 l.setText(s);
             } else {
@@ -318,13 +322,13 @@ public class ListController {
 
         switch (type) {
             case "Minutes":
-                intervalValue *= 60;
+                intervalValue *= minSec;
                 break;
             case "Hours":
-                intervalValue *= 3600;
+                intervalValue *= hourSec;
                 break;
             case "Days":
-                intervalValue *= 86400;
+                intervalValue *= daySec;
                 break;
         }
 
@@ -358,14 +362,14 @@ public class ListController {
         active.setSelected(task.isActive());
 
         intervalType.setItems(FXCollections.observableArrayList("Minutes", "Hours", "Days"));
-        if (task.getRepeatInterval() / 86400 > 0) {
-            interval.setText(task.getRepeatInterval() / 86400 + "");
+        if (task.getRepeatInterval() / daySec > 0) {
+            interval.setText(task.getRepeatInterval() / daySec + "");
             intervalType.setValue("Days");
-        } else if (task.getRepeatInterval() / 3600 > 0) {
-            interval.setText(task.getRepeatInterval() / 3600 + "");
+        } else if (task.getRepeatInterval() / hourSec > 0) {
+            interval.setText(task.getRepeatInterval() / hourSec + "");
             intervalType.setValue("Hours");
         } else {
-            interval.setText(task.getRepeatInterval() / 60 + "");
+            interval.setText(task.getRepeatInterval() / minSec + "");
             intervalType.setValue("Minutes");
         }
 
