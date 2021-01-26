@@ -55,6 +55,11 @@
                 <Font size="15.0" />
             </font>
         </Text>
+        <Text fx:id="errorSchedule" fill="#e40f0f" layoutX="188.0" layoutY="278.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Set appropriate time " visible="false" wrappingWidth="108.0">
+            <font>
+                <Font size="15.0" />
+            </font>
+        </Text>
     </Pane>
     <Pane fx:id="newTask" layoutX="110.0" layoutY="36.0" prefHeight="188.0" prefWidth="528.0" style="-fx-background-color: grey;" visible="false">
 
