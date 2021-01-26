@@ -100,7 +100,10 @@ public class MainController {
     @FXML
     private ComboBox<String> intervalType;
 
-    private App app = App.getInstance();
+    private final int minSec = 60;
+    private final int hourSec = 3600;
+    private final int daySec = 86400;
+    private final App app = App.getInstance();
 
 
     @FXML
@@ -259,13 +262,13 @@ public class MainController {
 
         switch (type) {
             case "Minutes":
-                intervalValue *= 60;
+                intervalValue *= minSec;
                 break;
             case "Hours":
-                intervalValue *= 3600;
+                intervalValue *= hourSec;
                 break;
             case "Days":
-                intervalValue *= 86400;
+                intervalValue *= daySec;
                 break;
         }
 

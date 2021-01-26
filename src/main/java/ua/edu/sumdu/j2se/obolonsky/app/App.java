@@ -29,48 +29,49 @@ public class App {
     private App() {
         try {
             TaskIO.readText(list, saves);
-            timer = new TaskTimer(true) {
-                @Override
-                public TimerTask newTimerTask(Task task) {
-                    TimerTask timerTask = new TimerTask() {
-                        @Override
-                        public void run() {
-                            if (SystemTray.isSupported()){
-                                SystemTray tray = SystemTray.getSystemTray();
-                                tray.getTrayIcons()[0].displayMessage(task.getTitle(),
-                                        "", TrayIcon.MessageType.INFO);
-
-                                map.remove(LocalDateTime.now().withNano(0).withSecond(0));
-                                if (!map.isEmpty()){
-                                    setFirst();
-                                } else {
-                                    setFirst("Next task");
-                                }
-                            }
-                            if (task.nextTimeAfter(LocalDateTime.now()) == null){
-                                cancel();
-                                timer.purge();
-                            }
-                            logger.info("Task executed");
-                        }
-                    };
-                    return timerTask;
-                }
-            };
-            timer.scheduleTimer(list);
-            map = Tasks.calendar(list, LocalDateTime.now().withNano(0), timer.getLast());
-            if (!map.isEmpty()){
-                setFirst();
-            } else {
-                setFirst("Next task");
-            }
         } catch (IOException e) {
             logger.error("Couldn`t read from file saves.json", e);
         }
+        timer = new TaskTimer(true) {
+            @Override
+            public TimerTask newTimerTask(Task task) {
+                TimerTask timerTask = new TimerTask() {
+                    @Override
+                    public void run() {
+                        if (SystemTray.isSupported()) {
+                            SystemTray tray = SystemTray.getSystemTray();
+                            tray.getTrayIcons()[0].displayMessage(task.getTitle(),
+                                    "", TrayIcon.MessageType.INFO);
+
+                            map.remove(LocalDateTime.now().withNano(0).withSecond(0));
+                            if (!map.isEmpty()) {
+                                setFirst();
+                            } else {
+                                setFirst("Next task");
+                            }
+                        }
+                        if (task.nextTimeAfter(LocalDateTime.now()) == null) {
+                            cancel();
+                            timer.purge();
+                        }
+                        logger.info("Task executed");
+                    }
+                };
+                return timerTask;
+            }
+        };
+        timer.scheduleTimer(list);
+        map = Tasks.calendar(list, LocalDateTime.now().withNano(0), timer.getLast());
+        if (!map.isEmpty()) {
+            setFirst();
+        } else {
+            setFirst("Next task");
+        }
+
     }
 
-    public static App getInstance(){
-        if (instance == null){
+    public static App getInstance() {
+        if (instance == null) {
             instance = new App();
         }
         return instance;
@@ -88,12 +89,12 @@ public class App {
         this.first.set(first);
     }
 
-    public void setFirst(){
+    public void setFirst() {
         LocalDateTime time = map.firstKey();
         StringBuilder s = new StringBuilder(time.toLocalDate().toString() + "  " +
                 time.getHour() + " : " + time.getMinute() + "\n\n");
         int c = 0;
-        for (Task t: map.get(time)){
+        for (Task t : map.get(time)) {
             s.append(t.getTitle()).append("  ");
             if (c == 2) {
                 s.append(" ...");
@@ -104,8 +105,8 @@ public class App {
         setFirst(s.toString());
     }
 
-    public static Logger getLogger(){
-        return  logger;
+    public static Logger getLogger() {
+        return logger;
     }
 
     public File getSaves(){
