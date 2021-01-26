@@ -396,16 +396,12 @@ public class ListController {
             newTask.setPrefHeight(320);
             editButton.setLayoutY(280);
             error.setLayoutY(248);
-            for (Node node : nodes) {
-                node.setVisible(true);
-            }
+            nodes.forEach(node -> node.setVisible(true));
         } else {
             newTask.setPrefHeight(204);
             editButton.setLayoutY(150);
             error.setLayoutY(158);
-            for (Node node : nodes) {
-                node.setVisible(false);
-            }
+            nodes.forEach(node -> node.setVisible(false));
         }
     }
 
@@ -449,9 +445,7 @@ public class ListController {
     }
 
     private void listCreation(VBox vBox) {
-        for (Task task : app.getList()) {
-            vBox.getChildren().add(newTaskPane(task));
-        }
+        app.getList().forEach(task -> vBox.getChildren().add(newTaskPane(task)));
     }
 
     private void mapCreation(VBox vBox) {
@@ -463,9 +457,7 @@ public class ListController {
             if (time.isAfter(start) && time.isBefore(end)){
                 vBox.getChildren().add(newTimePane(time.toLocalDate() + "  " + time.getHour()
                         + " : " + time.getMinute()));
-                for (Task t : p.getValue()) {
-                    vBox.getChildren().add(newTaskPane(t));
-                }
+                p.getValue().forEach(t -> vBox.getChildren().add(newTaskPane(t)));
             }
         }
     }

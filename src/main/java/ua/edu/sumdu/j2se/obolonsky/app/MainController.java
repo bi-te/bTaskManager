@@ -282,16 +282,12 @@ public class MainController {
             newTask.setPrefHeight(320);
             create.setLayoutY(280);
             error.setLayoutY(248);
-            for (Node node : nodes) {
-                node.setVisible(true);
-            }
+            nodes.forEach(node -> node.setVisible(true));
         } else {
             newTask.setPrefHeight(204);
             create.setLayoutY(150);
             error.setLayoutY(158);
-            for (Node node : nodes) {
-                node.setVisible(false);
-            }
+            nodes.forEach(node -> node.setVisible(false));
         }
     }
 }
